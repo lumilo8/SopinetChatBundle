@@ -1,0 +1,27 @@
+{
+  "name": "sopinet/uploadfiles-bundle",
+  "description": "Symfony2 Bundle - Notification groups Bundle",
+  "keywords": ["chat", "notification","gcm", "apns", "symfony2", "bundle", "sopinet"],
+  "type": "symfony-bundle",
+  "license": "GPL2",
+  "minimum-stability" : "dev",
+  "authors": [
+    {
+      "name": "Alejandro Arrabal",
+      "email": "aarrabal@sopinet.com",
+      "homepage": "http://sopinet.com"
+    },
+    {
+      "name": "Fernando Hidalgo",
+      "email": "fhidalgo@sopinet.com",
+      "homepage": "http://sopinet.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.4.0"
+  },
+  "autoload": {
+    "psr-0": { "Sopinet\\ChatBundle": "" }
+  },
+  "target-dir": "Sopinet/ChatBundle"
+}
