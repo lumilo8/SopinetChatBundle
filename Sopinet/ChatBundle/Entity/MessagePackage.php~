@@ -1,0 +1,169 @@
+<?php
+namespace Sopinet\ChatBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation\Exclude;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Sopinet\ChatBundle\Model\MessageObject;
+use Symfony\Bridge\Doctrine\Validator\Constraints as DoctrineAssert;
+use Symfony\Component\DependencyInjection\Container;
+
+
+/**
+ * Entity MessagePackage
+ *
+ * @ORM\Entity
+ * @DoctrineAssert\UniqueEntity("id")
+ * @ORM\Table(name="sopinet_chatbundle_messagepackage")
+ */
+class MessagePackage
+{
+    const STATUS_OK = 1;
+    const STATUS_KO = -1;
+    const STATUS_PENDING = 0;
+
+    use ORMBehaviors\Timestampable\Timestampable;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @Groups({"create", "edit", "login"})
+     */
+    protected $id;
+
+    // TODO: ESTO NO PUEDE ESTAR AQUí; MOVERLO A CHAT
+    /**
+     * @ORM\ManyToOne(targetEntity="\Sopinet\ChatBundle\Entity\Message", inversedBy="messagesGenerated", cascade={"persist", "remove"})
+     * @Exclude
+     */
+    protected $message;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="\Application\Sonata\UserBundle\Entity\User", inversedBy="messagesPackageReceived", cascade={"persist", "remove"})
+     * @ORM\OrderBy({"id" = "DESC"})
+     * @Exclude
+     */
+    protected $toUser;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Device", inversedBy="messagesPackageReceived", cascade={"persist", "remove"})
+     * @Exclude
+     */
+    protected $toDevice;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $status;
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set status
+     *
+     * @param integer $status
+     * @return MessagePackage
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get integer
+     *
+     * @return integer
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Set message
+     *
+     * @param \Sopinet\ChatBundle\Entity\Message $message
+     * @return MessagePackage
+     */
+    public function setMessage(\Sopinet\ChatBundle\Entity\Message $message = null)
+    {
+        $this->message = $message;
+
+        return $this;
+    }
+
+    /**
+     * Get message
+     *
+     * @return \Sopinet\ChatBundle\Entity\Message 
+     */
+    public function getMessage()
+    {
+        return $this->message;
+    }
+
+    /**
+     * Set toUser
+     *
+     * @param \Application\Sonata\UserBundle\Entity\User $toUser
+     * @return MessagePackage
+     */
+    public function setToUser(\Application\Sonata\UserBundle\Entity\User $toUser = null)
+    {
+        $this->toUser = $toUser;
+
+        return $this;
+    }
+
+    /**
+     * Get toUser
+     *
+     * @return \Application\Sonata\UserBundle\Entity\User 
+     */
+    public function getToUser()
+    {
+        return $this->toUser;
+    }
+
+    /**
+     * Set toDevice
+     *
+     * @param \Sopinet\ChatBundle\Entity\Device $toDevice
+     * @return MessagePackage
+     */
+    public function setToDevice(\Sopinet\ChatBundle\Entity\Device $toDevice = null)
+    {
+        $this->toDevice = $toDevice;
+
+        return $this;
+    }
+
+    /**
+     * Get toDevice
+     *
+     * @return \Sopinet\ChatBundle\Entity\Device 
+     */
+    public function getToDevice()
+    {
+        return $this->toDevice;
+    }
+
+    public function __toString() {
+        return $this->getToUser()->__toString() . " - " . $this->getToDevice()->__toString();
+    }
+}

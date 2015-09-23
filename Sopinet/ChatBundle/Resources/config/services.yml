@@ -1,0 +1,55 @@
+services:
+    sopinet_chatbundle_apihelper:
+        class: Sopinet\ChatBundle\Service\ApiHelper
+        arguments: ["@doctrine.orm.entity_manager", "@fos_rest.view_handler"]
+
+
+    sopinet_chatbundle_chathelper:
+        class: Sopinet\ChatBundle\Service\ChatHelper
+        arguments: ["@service_container"]
+
+    sopinet_chatbundle_messagehelper:
+        class: Sopinet\ChatBundle\Service\MessageHelper
+        arguments: ["@service_container"]
+
+    sopinet_chatbundle_filehelper:
+        class: Sopinet\ChatBundle\Service\FileHelper
+        arguments: ["@service_container"]
+
+    sopinet_chatbundle_interfacehelper:
+        class: Sopinet\ChatBundle\Service\InterfaceHelper
+        arguments: ["@service_container"]
+
+    sopinet_chatbundle_metricshelper:
+        class: Sopinet\ChatBundle\Service\MetricsHelper
+        arguments: ["@service_container"]
+
+    sopinet_chat.admin.chat:
+        class: Sopinet\ChatBundle\Admin\ChatAdmin
+        arguments: [~, Sopinet\ChatBundle\Entity\Chat, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: SopinetChat, label: Chat, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
+
+    sopinet_chat.admin.message:
+        class: Sopinet\ChatBundle\Admin\MessageAdmin
+        arguments: [~, Sopinet\ChatBundle\Entity\Message, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: SopinetChat, label: Message, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
+
+    sopinet_chat.admin.device:
+        class: Sopinet\ChatBundle\Admin\DeviceAdmin
+        arguments: [~, Sopinet\ChatBundle\Entity\Device, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: SopinetChat, label: Device, label_translator_strategy: "sonata.admin.label.strategy.underscore" }
+
+    sopinet_chat.admin.message_package:
+        class: Sopinet\ChatBundle\Admin\MessagePackageAdmin
+        arguments: [~, Sopinet\ChatBundle\Entity\MessagePackage, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: SopinetChat, label: MessagePackage}
+
+    sopinet_chatbundle.listener.doctrine_event_listener:
+        class: Sopinet\ChatBundle\Listener\DoctrineEventListener
+        arguments: [%sopinet_chat.config%]
+        tags:
+            - { name: doctrine.event_listener, event: loadClassMetadata }

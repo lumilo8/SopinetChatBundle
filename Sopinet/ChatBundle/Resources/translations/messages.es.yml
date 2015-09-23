@@ -1,0 +1,63 @@
+breadcrumb:
+  link_chat_list: 'Chats'
+  link_message_list: 'Mensajes'
+
+form:
+  label_deleted_at: 'Fecha de Borrado'
+  label_type: 'Tipo'
+  label_name: 'Nombre'
+  label_chat_members: 'Miembros del Chat'
+  label_admin: 'Administrador'
+  label_messages: 'Mensajes'
+  label_chat: 'Chat'
+  label_mytype: 'Tipo'
+  label_from_device: 'Dispositivo emisor'
+  label_text: 'Texto'
+  label_from_time: 'Momento de emisión'
+
+filter:
+  label_type: 'Tipo'
+  label_created_at: 'Fecha de Creación'
+  label_updated_at: 'Fecha de Actualización'
+  label_deleted_at: 'Fecha de Borrado'
+  label_chat_members: 'Miembros del Chat'
+  label_admin: 'Administrador'
+  label_chat: 'Chat'
+  label_from_device: 'Dispositivo emisor'
+  label_text: 'Texto'
+  label_from_time: 'Momento de emisión'
+  label_from_user: 'Usuario emisor'
+  label_type_client: 'Tipo de Mensaje'
+  label_from_device_device_type: 'Tipo de Dispositivo emisor'
+
+list:
+  label_type: 'Tipo'
+  label_created_at: 'Fecha de Creación'
+  label_updated_at: 'Fecha de Actualización'
+  label_deleted_at: 'Fecha de Borrado'
+  label_chat_members: 'Miembros del Chat'
+  label_admin: 'Administrador'
+  label_chat: 'Chat'
+  label_mytype: 'Tipo'
+  label_from_device: 'Dispositivo emisor'
+  label_text: 'Texto'
+  label_from_time: 'Momento de emisión'
+  label_type_client: 'Tipo de Mensaje'
+
+show:
+  label_type: 'Tipo'
+  label_created_at: 'Fecha de Creación'
+  label_updated_at: 'Fecha de Actualización'
+  label_deleted_at: 'Fecha de Borrado'
+  label_chat_members: 'Miembros del Chat'
+  label_admin: 'Administrador'
+  label_messages: 'Mensajes'
+  label_chat: 'Chat'
+  label_mytype: 'Tipo'
+  label_type_client: 'Tipo de Mensaje'
+  label_from_device: 'Dispositivo emisor'
+  label_text: 'Texto'
+  label_from_time: 'Momento de emisión'
+
+Chat: Chat
+Message: Mensaje

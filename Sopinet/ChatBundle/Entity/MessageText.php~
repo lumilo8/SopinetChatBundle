@@ -1,0 +1,12 @@
+<?php
+namespace Sopinet\ChatBundle\Entity;
+use Sopinet\ChatBundle\Entity\Message;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ */
+class MessageText extends Message
+{
+
+}
