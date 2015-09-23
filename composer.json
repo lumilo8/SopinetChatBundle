@@ -1,5 +1,5 @@
 {
-  "name": "sopinet/uploadfiles-bundle",
+  "name": "sopinet/chatbundle",
   "description": "Symfony2 Bundle - Notification groups Bundle",
   "keywords": ["chat", "notification","gcm", "apns", "symfony2", "bundle", "sopinet"],
   "type": "symfony-bundle",
