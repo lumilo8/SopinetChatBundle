@@ -129,9 +129,9 @@ class MessageHelper {
                     $messagePackage->setStatus(MessagePackage::STATUS_KO);
                 }
                 if ($device->getDeviceType() == Device::TYPE_ANDROID) {
-                    $messagePackage->setProccesed(1); // Processed
+                    $messagePackage->setProcessed(true); // Yes, processed
                 } elseif ($device->getDeviceType() == Device::TYPE_IOS) {
-                    $messagePackage->setProccesed(0); // Processed
+                    $messagePackage->setProcessed(false); // Not processed
                 }
                 $em->persist($messagePackage);
                 $em->flush();

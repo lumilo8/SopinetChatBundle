@@ -209,7 +209,7 @@ class InterfaceHelper
         $messagesPackage = $reMessagePackage->findBy(array(
             'toUser' => $user->getId(),
             'toDevice' => $device->getDeviceId(),
-            'processed' => 0
+            'processed' => false
         ));
 
         /** @var MessageHelper $messageHelper */
@@ -274,7 +274,8 @@ class InterfaceHelper
             'message' => $request->get('messageId')
         ));
 
-        $messagePackage->setProccesed(1);
+        $messagePackage->setProcessed(true);
+
         $em->persist($messagePackage);
         $em->flush();
 

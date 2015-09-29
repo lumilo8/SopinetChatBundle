@@ -62,14 +62,14 @@ class MessagePackage
     protected $status;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="boolean", nullable=true)
      */
     protected $processed;
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -108,14 +108,14 @@ class MessagePackage
     }
 
     /**
-     * Set proccesed
+     * Set processed
      *
-     * @param integer $proccesed
+     * @param integer $processed
      * @return MessagePackage
      */
-    public function setProccesed($proccesed)
+    public function setProcessed($processed)
     {
-        $this->proccesed = $proccesed;
+        $this->processed = $processed;
 
         return $this;
     }
@@ -125,9 +125,9 @@ class MessagePackage
      *
      * @return integer
      */
-    public function getProccesed()
+    public function getProcessed()
     {
-        return $this->proccesed;
+        return $this->processed;
     }
 
     /**
@@ -146,7 +146,7 @@ class MessagePackage
     /**
      * Get message
      *
-     * @return \Sopinet\ChatBundle\Entity\Message 
+     * @return \Sopinet\ChatBundle\Entity\Message
      */
     public function getMessage()
     {
@@ -169,7 +169,7 @@ class MessagePackage
     /**
      * Get toUser
      *
-     * @return \Application\Sonata\UserBundle\Entity\User 
+     * @return \Application\Sonata\UserBundle\Entity\User
      */
     public function getToUser()
     {
@@ -192,7 +192,7 @@ class MessagePackage
     /**
      * Get toDevice
      *
-     * @return \Sopinet\ChatBundle\Entity\Device 
+     * @return \Sopinet\ChatBundle\Entity\Device
      */
     public function getToDevice()
     {

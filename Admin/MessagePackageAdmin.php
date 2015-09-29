@@ -18,6 +18,7 @@ class MessagePackageAdmin extends Admin
         $datagridMapper
             ->add('id')
             ->add('message')
+            ->add('message.fromUser')
             ->add('toUser')
             ->add('toDevice')
             ->add('status')
