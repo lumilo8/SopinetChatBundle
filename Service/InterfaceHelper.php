@@ -219,7 +219,7 @@ class InterfaceHelper
         /** @var MessagePackage $messagePackage */
         foreach($messagesPackage as $messagePackage) {
             $isOk = $messageHelper->sendRealMessageToDevice(
-                $messagePackage->getMessage(),
+                $messagePackage->getMessage()->getMyMessageObject($this->container),
                 $messagePackage->getMessage()->getText(),
                 $messagePackage->getToDevice(),
                 $messagePackage->getToUser()
