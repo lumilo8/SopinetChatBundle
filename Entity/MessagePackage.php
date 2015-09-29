@@ -81,7 +81,7 @@ class MessagePackage
      */
     public function __construct()
     {
-        $this->processed = 0;
+        //$this->processed = 0;
     }
 
     /**
