@@ -19,6 +19,7 @@ class MessagePackageAdmin extends Admin
             ->add('id')
             ->add('message')
             ->add('message.fromUser')
+            ->add('message.fromDevice')
             ->add('toUser')
             ->add('toDevice')
             ->add('status')
@@ -65,6 +66,7 @@ class MessagePackageAdmin extends Admin
             ->add('toUser')
             ->add('toDevice')
             ->add('status')
+            ->add('processed')
         ;
     }
 
