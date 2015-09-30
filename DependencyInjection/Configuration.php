@@ -35,6 +35,11 @@ class Configuration implements ConfigurationInterface
         $defaultTypeMessage['image']['interfaceEnabled'] = true;
         $defaultTypeMessage['image']['class'] = "Sopinet\ChatBundle\Entity\MessageImage";
 
+        $defaultTypeMessage['received'] = array();
+        $defaultTypeMessage['received']['enabled'] = true;
+        $defaultTypeMessage['received']['interfaceEnabled'] = true;
+        $defaultTypeMessage['received']['class'] = "Sopinet\ChatBundle\Entity\MessageReceived";
+
         $rootNode
                 ->children()
                     ->booleanNode('anyType')->defaultFalse()->end()
@@ -47,7 +52,6 @@ class Configuration implements ConfigurationInterface
                                 ->booleanNode('enabled')->defaultTrue()->end()
                                 ->booleanNode('interfaceEnabled')->defaultTrue()->end()
                                 ->scalarNode('class')->end()
-                                ->scalarNode('iosNotificationFields')->defaultValue('fromUsername')->end() // TODO: No está terminado
                             ->end()
                         ->end()
                     ->end()
@@ -57,7 +61,6 @@ class Configuration implements ConfigurationInterface
                                 ->booleanNode('enabled')->defaultTrue()->end()
                                 ->booleanNode('interfaceEnabled')->defaultTrue()->end()
                                 ->scalarNode('class')->end()
-                                ->scalarNode('iosNotificationFields')->defaultValue('fromUsername')->end() // TODO: No está terminado
                             ->end()
                         ->end()
                     ->end();

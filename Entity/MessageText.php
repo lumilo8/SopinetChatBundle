@@ -8,14 +8,14 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class MessageText extends Message
 {
+    public function getMyIOSNotificationFields() {
+        $userName = $this->getFromUser()->__toString();
+        $text = $this->__toString();
 
+        return $userName . "@" . $text;
+    }
 
-    /**
-     * Set subject
-     *
-     * @param integer $subject
-     * @return MessageText
-     */
+    /** ESTO NO SE USA, NO???
     public function setSubject($subject)
     {
         $this->subject = $subject;
@@ -23,13 +23,9 @@ class MessageText extends Message
         return $this;
     }
 
-    /**
-     * Get subject
-     *
-     * @return integer 
-     */
     public function getSubject()
     {
         return $this->subject;
     }
+    **/
 }
