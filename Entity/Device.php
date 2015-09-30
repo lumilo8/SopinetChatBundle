@@ -10,10 +10,10 @@ use JMS\Serializer\Annotation\Groups;
 use Doctrine\ORM\Event\OnFlushEventArgs;
 
 /**
-* @ORM\Entity(repositoryClass="Sopinet\ChatBundle\Entity\DeviceRepository")
-* @ORM\Table(name="sopinet_chatbundle_device")
-* @DoctrineAssert\UniqueEntity("deviceId")
-*/
+ * @ORM\Entity(repositoryClass="Sopinet\ChatBundle\Entity\DeviceRepository")
+ * @ORM\Table(name="sopinet_chatbundle_device")
+ * @DoctrineAssert\UniqueEntity("deviceId")
+ */
 class Device
 {
     use ORMBehaviors\Timestampable\Timestampable;
@@ -43,19 +43,16 @@ class Device
 
     /**
      * @ORM\ManyToMany(targetEntity="\Application\Sonata\UserBundle\Entity\User", inversedBy="devices")
-     * @ORM\JoinTable(name="sopinet_chatbundle_users_devices")
      */
     protected $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="Message", mappedBy="fromDevice")
-     * @ORM\JoinColumn(name="message_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
+     * @ORM\OneToMany(targetEntity="Message", mappedBy="fromDevice", cascade={"remove"})
      */
     protected $messages;
 
     /**
-     * @ORM\OneToMany(targetEntity="MessagePackage", mappedBy="toDevice")
-     * @ORM\JoinColumn(name="messagePackageReceived_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
+     * @ORM\OneToMany(targetEntity="MessagePackage", mappedBy="toDevice", cascade={"remove"})
      */
     protected $messagesPackageReceived;
 
@@ -153,7 +150,7 @@ class Device
     /**
      * Get user
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getUser()
     {

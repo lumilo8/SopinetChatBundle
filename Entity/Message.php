@@ -41,19 +41,20 @@ abstract class Message
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Chat", inversedBy="messages", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="Chat", inversedBy="messages", cascade={"persist"})
+     * @ORM\JoinColumn(name="chat_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      * @ORM\OrderBy({"id" = "DESC"})
      */
     protected $chat;
 
     /**
-     * @ORM\OneToMany(targetEntity="MessagePackage", mappedBy="message")
-     * @ORM\JoinColumn(name="messagesGenerated_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
+     * @ORM\OneToMany(targetEntity="MessagePackage", mappedBy="message", cascade={"persist"})
      */
     protected $messagesGenerated;
 
     /**
-     * @ORM\ManyToOne(targetEntity="\Application\Sonata\UserBundle\Entity\User", inversedBy="messages", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="\Application\Sonata\UserBundle\Entity\User", inversedBy="messages", cascade={"persist"})
+     * @ORM\JoinColumn(name="fromUser_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      * @ORM\OrderBy({"id" = "DESC"})
      * @Exclude
      */
@@ -287,7 +288,7 @@ abstract class Message
     /**
      * Get messagesGenerated
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getMessagesGenerated()
     {

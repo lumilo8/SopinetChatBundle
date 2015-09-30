@@ -51,13 +51,13 @@ class Chat
     /**
      * Administrador o persona que inicia el Chat
      *
-     * @ORM\ManyToOne(targetEntity="\Application\Sonata\UserBundle\Entity\User", inversedBy="chatsOwned", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(name="admin_id", referencedColumnName="id", nullable=true)
+     * @ORM\ManyToOne(targetEntity="\Application\Sonata\UserBundle\Entity\User", inversedBy="chatsOwned", cascade={"persist"})
+     * @ORM\JoinColumn(name="admin_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     protected $admin;
 
     /**
-     * @ORM\OneToMany(targetEntity="Message", mappedBy="chat", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Message", mappedBy="chat", cascade={"persist"})
      * @ORM\OrderBy({"id" = "DESC"})
      * @Exclude
      */
@@ -205,7 +205,7 @@ class Chat
     /**
      * Get chatMembers
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getChatMembers()
     {

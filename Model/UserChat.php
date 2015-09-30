@@ -30,25 +30,24 @@ trait UserChat
 
     /**
      * @ORM\ManyToMany(targetEntity="\Sopinet\ChatBundle\Entity\Device", mappedBy="user")
+     * @ORM\JoinColumn(name="device_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     protected $devices;
 
 
     /**
-     * @ORM\OneToMany(targetEntity="\Sopinet\ChatBundle\Entity\Message", mappedBy="fromUser")
-     * @ORM\JoinColumn(name="message_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
+     * @ORM\OneToMany(targetEntity="\Sopinet\ChatBundle\Entity\Message", mappedBy="fromUser", cascade={"persist"})
      */
     protected $messages;
 
     /**
      * @ORM\ManyToMany(targetEntity="\Sopinet\ChatBundle\Entity\Chat", inversedBy="chatMembers")
-     * @ORM\JoinColumn(name="chat_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
+     * @ORM\JoinColumn(name="chat_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     protected $chats;
 
     /**
-     * @ORM\OneToMany(targetEntity="\Sopinet\ChatBundle\Entity\Chat", mappedBy="admin")
-     * @ORM\JoinColumn(name="chat_owned_id", referencedColumnName="id", nullable=true)
+     * @ORM\OneToMany(targetEntity="\Sopinet\ChatBundle\Entity\Chat", mappedBy="admin", cascade={"persist"})
      */
     protected $chatsOwned;
 

@@ -20,8 +20,8 @@ trait MinimalPackage
     protected $text;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Sopinet\ChatBundle\Entity\Device", inversedBy="messages", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(name="device_id", referencedColumnName="id", nullable=true)
+     * @ORM\ManyToOne(targetEntity="Sopinet\ChatBundle\Entity\Device", inversedBy="messages", cascade={"persist"})
+     * @ORM\JoinColumn(name="device_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      * @ORM\OrderBy({"id" = "DESC"})
      */
     protected $fromDevice;

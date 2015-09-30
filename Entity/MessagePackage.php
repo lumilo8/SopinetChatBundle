@@ -38,20 +38,23 @@ class MessagePackage
 
     // TODO: ESTO NO PUEDE ESTAR AQUí; MOVERLO A CHAT
     /**
-     * @ORM\ManyToOne(targetEntity="\Sopinet\ChatBundle\Entity\Message", inversedBy="messagesGenerated", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="\Sopinet\ChatBundle\Entity\Message", inversedBy="messagesGenerated", cascade={"persist"})
+     * @ORM\JoinColumn(name="message_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      * @Exclude
      */
     protected $message;
 
     /**
-     * @ORM\ManyToOne(targetEntity="\Application\Sonata\UserBundle\Entity\User", inversedBy="messagesPackageReceived", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="\Application\Sonata\UserBundle\Entity\User", inversedBy="messagesPackageReceived", cascade={"persist"})
+     * @ORM\JoinColumn(name="toUser_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      * @ORM\OrderBy({"id" = "DESC"})
      * @Exclude
      */
     protected $toUser;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Device", inversedBy="messagesPackageReceived", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="Device", inversedBy="messagesPackageReceived", cascade={"persist"})
+     * @ORM\JoinColumn(name="toDevice_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      * @Exclude
      */
     protected $toDevice;
