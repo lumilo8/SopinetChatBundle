@@ -8,12 +8,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class MessageText extends Message
 {
-    public function getMyIOSNotificationFields() {
-        $userName = $this->getFromUser()->__toString();
-        $text = $this->__toString();
-
-        return $userName . "@" . $text;
-    }
 
     /** ESTO NO SE USA, NO???
     public function setSubject($subject)

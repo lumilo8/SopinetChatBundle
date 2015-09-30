@@ -45,6 +45,7 @@ class Configuration implements ConfigurationInterface
                     ->booleanNode('anyType')->defaultFalse()->end()
                     ->booleanNode('enabledAndroid')->defaultTrue()->end()
                     ->booleanNode('enabledIOS')->defaultTrue()->end()
+                    ->scalarNode('soundIOS')->defaultValue('default')->end()
                     ->arrayNode('basic_type_message')
                         ->defaultValue($defaultTypeMessage)
                         ->prototype('array')

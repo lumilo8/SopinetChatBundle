@@ -242,10 +242,11 @@ class MessageHelper {
 
             //nombredelChat@nombredeUsuario;
             $messageString = $notificationFields;
-            $alert['loc-args']=array($messageString, $text);
+            $alert['loc-args'] = array($messageString, $text);
             $alert['loc-key']=$mes['type'];
             $message->setMessage($alert);
-            $message->setAPSSound('default');
+            $config = $this->container->getParameter('sopinet_chat.config');
+            $message->setAPSSound($config['soundIOS']);
 
         }
         $message->setDeviceIdentifier($to);
