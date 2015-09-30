@@ -116,9 +116,10 @@ class MessageHelper {
         /** @var Device $device */
         foreach($user->getDevices() as $device) {
             if ($message->getFromDevice() == null || $message->getFromDevice()->getDeviceId() != $device->getDeviceId()) {
-                $messageObject = $message->getMyMessageObject($this->container);
-                $text = $message;
-                $response = $this->sendRealMessageToDevice($messageObject, $text, $device, $user);
+                // DEPRECATED! Next code is deprecated, now i pass message object for better iOS options
+                //$messageObject = $message->getMyMessageObject($this->container);
+                //$text = $message;
+                $response = $this->sendRealMessageToDevice($message, $device, $user);
                 $messagePackage = new MessagePackage();
                 $messagePackage->setMessage($message);
                 $messagePackage->setToDevice($device);
@@ -142,13 +143,20 @@ class MessageHelper {
     }
 
     /**
+     * Send message to User and device
+     * It functions transform to Real message data array
+     *
      * @param Object $msg
      * @param String $to
      *
      */
-    public function sendRealMessageToDevice($messageData, $text, Device $device, User $user = null)
+    public function sendRealMessageToDevice(Message $message, Device $device, User $user = null)
     {
         $config = $this->container->getParameter('sopinet_chat.config');
+
+        $messageData = $message->getMyMessageObject($this->container);
+
+        $text = $message->__toString();
 
         $messageArray = array();
 
@@ -165,7 +173,7 @@ class MessageHelper {
         if ($device->getDeviceType() == Device::TYPE_ANDROID && $config['enabledAndroid']) {
             return $this->sendGCMessage($messageArray, $text, $device->getDeviceGCMId());
         } elseif ($device->getDeviceType() == Device::TYPE_IOS && $config['enabledIOS']) {
-            return $this->sendAPNMessage($messageArray, $text, $device->getDeviceId());
+            return $this->sendAPNMessage($messageArray, $text, $device->getDeviceId(), $message->getMyIOSContentAvailable(), $message->getMyIOSNotificationFields());
         }
     }
 
@@ -203,7 +211,7 @@ class MessageHelper {
      *
      * @throws \InvalidArgumentException
      */
-    private function sendAPNMessage($mes, $text, $to, $wakeUp = true)
+    private function sendAPNMessage($mes, $text, $to, $contentAvailable, $notificationFields)
     {
         $message=new iOSMessage();
         try {
@@ -220,7 +228,7 @@ class MessageHelper {
 
         /** @var User $user */
         // $user=$reDevice->findOneByPhone($mes['phone']);
-        if ($wakeUp) {
+        if ($contentAvailable) {
             /**
             if ($mes['chattype']=='event') {
                 $em = $this->container->get("doctrine.orm.entity_manager");
@@ -233,7 +241,7 @@ class MessageHelper {
             **/
 
             //nombredelChat@nombredeUsuario;
-            $messageString = $mes['fromUsername']; // TODO: Configurable (param1@param2 sería posible)
+            $messageString = $notificationFields;
             $alert['loc-args']=array($messageString, $text);
             $alert['loc-key']=$mes['type'];
             $message->setMessage($alert);
@@ -241,7 +249,7 @@ class MessageHelper {
 
         }
         $message->setDeviceIdentifier($to);
-        $message->setAPSContentAvailable($wakeUp);
+        $message->setAPSContentAvailable($contentAvailable);
         return $this->container->get('rms_push_notifications')->send($message);
     }
 }

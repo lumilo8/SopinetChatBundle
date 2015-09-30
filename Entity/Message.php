@@ -203,10 +203,14 @@ abstract class Message
         return $messageObject;
     }
 
-    public function getMyIOSNotificationFields($container) {
-        $config = $container->getParameter('sopinet_chat.config');
+    public function getMyIOSNotificationFields() {
+        // by default: username (user String)
+        return $this->getFromUser()->__toString();
+    }
 
-        // TODO: Terminar
+    public function getMyIOSContentAvailable() {
+        // by default: true
+        return true;
     }
 
     /**
@@ -215,7 +219,7 @@ abstract class Message
      * TODO: It could be transform in getDestination, and return Users or Device (for anonymous notification system), review it
      */
     public function getMyDestionationUsers($container) {
-        // Get users
+        // by default: Get users
         $users = $this->getChat()->getChatMembers();
 
         return $users;
