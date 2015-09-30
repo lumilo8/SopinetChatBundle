@@ -145,11 +145,15 @@ class InterfaceHelper
         if (!$reDevice->existsDevice($request->get('deviceId'))) {
             $device = new Device();
         } else {
+            $device = $reDevice->findOneByDeviceId($request->get('deviceId'));
+            /**
+             * Deprecated!, este código se podría eliminar
             if ($request->get('deviceType') == Device::TYPE_IOS) {
-                return null;
+            return null;
             } elseif ($request->get('deviceType') == Device::TYPE_ANDROID) {
-                $device = $reDevice->findOneByDeviceId($request->get('deviceId'));
+            $device = $reDevice->findOneByDeviceId($request->get('deviceId'));
             }
+             **/
         }
 
         /** @var Form $form */
