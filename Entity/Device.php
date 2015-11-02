@@ -10,16 +10,17 @@ use JMS\Serializer\Annotation\Groups;
 use Doctrine\ORM\Event\OnFlushEventArgs;
 
 /**
- * @ORM\Entity(repositoryClass="Sopinet\ChatBundle\Entity\DeviceRepository")
- * @ORM\Table(name="sopinet_chatbundle_device")
- * @DoctrineAssert\UniqueEntity("deviceId")
- */
+* @ORM\Entity(repositoryClass="Sopinet\ChatBundle\Entity\DeviceRepository")
+* @ORM\Table(name="sopinet_chatbundle_device")
+* @DoctrineAssert\UniqueEntity("deviceId")
+*/
 class Device
 {
     use ORMBehaviors\Timestampable\Timestampable;
 
-    const TYPE_IOS="iOS";
-    const TYPE_ANDROID="Android";
+    const TYPE_IOS = "iOS";
+    const TYPE_ANDROID = "Android";
+    const TYPE_WEB = "Web";
 
     /**
      * @ORM\Id
@@ -60,7 +61,8 @@ class Device
      * @var string
      * iOS
      * Android
-     * @ORM\Column(name="type", type="string", columnDefinition="enum('iOS','Android')")
+     * Web
+     * @ORM\Column(name="type", type="string", columnDefinition="enum('iOS','Android','Web')")
      */
     protected $deviceType;
 
@@ -150,7 +152,7 @@ class Device
     /**
      * Get user
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection 
      */
     public function getUser()
     {

@@ -174,7 +174,33 @@ class MessageHelper {
             return $this->sendGCMessage($messageArray, $text, $device->getDeviceGCMId());
         } elseif ($device->getDeviceType() == Device::TYPE_IOS && $config['enabledIOS']) {
             return $this->sendAPNMessage($messageArray, $text, $device->getDeviceId(), $message->getMyIOSContentAvailable(), $message->getMyIOSNotificationFields());
+        } elseif ($device->getDeviceType() == Device::TYPE_WEB && $config['enabledWeb']) {
+            return $this->sendWebMessage($messageArray, $text, $device->getDeviceId());
         }
+    }
+
+    /**
+     * Función que envía un mensaje a un ID de sesión de una web
+     *
+     * @param $mes
+     * @param $text
+     * @param $to
+     */
+    private function sendWebMessage($mes, $text, $to) {
+        // Esto no haría falta :S
+        $mes['text'] = $text;
+
+        $pusher = $this->container->get('gos_web_socket.wamp.pusher');
+        $pusher->push($mes, 'session_topic', ['idSession' => $to]);
+
+        /*
+        $pusher->push([
+            'data' => $data,
+            'text' => $text
+        ], 'session_topic', ['idSession' => $to]);
+        */
+
+        return true;
     }
 
     /**
