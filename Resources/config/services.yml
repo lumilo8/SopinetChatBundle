@@ -53,3 +53,18 @@ services:
         arguments: [%sopinet_chat.config%]
         tags:
             - { name: doctrine.event_listener, event: loadClassMetadata }
+
+    chatbundle.topic_session_service:
+        class: Sopinet\ChatBundle\Topic\SessionTopic
+        tags:
+            - { name: gos_web_socket.topic }
+
+    gos_web_socket_server.client_event.listener:
+        class: Sopinet\ChatBundle\Listener\WebClientEventListener
+        arguments:  ['@service_container']
+        tags:
+            - { name: kernel.event_listener, event: 'gos_web_socket.client_connected', method: onClientConnect }
+            - { name: kernel.event_listener, event: 'gos_web_socket.client_disconnected', method: onClientDisconnect }
+            - { name: kernel.event_listener, event: 'gos_web_socket.client_error', method: onClientError }
+            - { name: kernel.event_listener, event: 'gos_web_socket.server_launched', method: onServerStart }
+            - { name: kernel.event_listener, event: 'gos_web_socket.client_rejected', method: onClientRejected }

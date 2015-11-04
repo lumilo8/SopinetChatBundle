@@ -1,0 +1,4 @@
+session_topic:
+    channel: session/{idSession}
+    handler:
+        callback: 'session.topic' #related to the getName() of your topic
