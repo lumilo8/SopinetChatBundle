@@ -326,6 +326,7 @@ class InterfaceHelper
             $message = new MessageUserState();
             $message->setFromUser($user);
             $message->setText(UserState::STATE_CONNECTED);
+            $message->setFromTime(new \DateTime());
             /** @var MessageHelper $messageHelper */
             $messageHelper = $this->container->get('sopinet_chatbundle_messagehelper');
             $messageHelper->sendMessage($message);

@@ -66,6 +66,7 @@ class checkUserStateCommand extends ContainerAwareCommand
                         $message = new MessageUserState();
                         $message->setFromUser($user);
                         $message->setText(UserState::STATE_DISCONNECTED);
+                        $message->setFromTime(new \DateTime());
                         /** @var MessageHelper $messageHelper */
                         $messageHelper = $con->get('sopinet_chatbundle_messagehelper');
                         $messageHelper->sendMessage($message);
