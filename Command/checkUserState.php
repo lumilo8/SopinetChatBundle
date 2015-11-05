@@ -56,7 +56,7 @@ class checkUserStateCommand extends ContainerAwareCommand
                 $userState = $user->getUserState();
                 if ($userState->getState() == UserState::STATE_CONNECTED && !$hasWebClient) {
                     $dateNow = new \DateTime();
-                    $diff = $dateNow->getTimestamp() - $userState->getCreatedAt()->getTimestamp();
+                    $diff = $dateNow->getTimestamp() - $userState->getUpdatedAt()->getTimestamp();
                     // User timeout!
                     if ($diff > $timeSec) {
                         $userState->setState(UserState::STATE_DISCONNECTED);

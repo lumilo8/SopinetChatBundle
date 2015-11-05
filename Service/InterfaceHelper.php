@@ -306,6 +306,9 @@ class InterfaceHelper
         if ($userState == null) {
             $userState = new UserState();
             $userState->setUser($user);
+            $user->setUserState($userState);
+            $em->persist($user);
+            $em->flush();
             $notify = true;
         } else {
             if ($userState->getState() == UserState::STATE_DISCONNECTED) {
