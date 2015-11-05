@@ -52,6 +52,11 @@ trait UserChat
     protected $chatsOwned;
 
     /**
+     * @ORM\OneToOne(targetEntity="\Sopinet\ChatBundle\Entity\UserState", inversedBy="user", cascade={"persist"})
+     **/
+    private $userState;
+
+    /**
      * Add message
      *
      * @param \Sopinet\ChatBundle\Entity\Message $message
@@ -153,4 +158,27 @@ trait UserChat
         return $this->chats;
     }
 
+    /**
+     * Set userState
+     *
+     * @param \Sopinet\ChatBundle\Entity\UserState $userState
+     *
+     * @return \Application\Sonata\UserBundle\Entity\User User
+     */
+    public function setUserState(\Sopinet\ChatBundle\Entity\UserState $userState = null)
+    {
+        $this->userState = $userState;
+
+        return $this;
+    }
+
+    /**
+     * Get userState
+     *
+     * @return \Sopinet\ChatBundle\Entity\UserState
+     */
+    public function getUserState()
+    {
+        return $this->userState;
+    }
 }

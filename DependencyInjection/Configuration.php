@@ -40,6 +40,11 @@ class Configuration implements ConfigurationInterface
         $defaultTypeMessage['received']['interfaceEnabled'] = true;
         $defaultTypeMessage['received']['class'] = "Sopinet\ChatBundle\Entity\MessageReceived";
 
+        $defaultTypeMessage['userState'] = array();
+        $defaultTypeMessage['userState']['enabled'] = true;
+        $defaultTypeMessage['userState']['interfaceEnabled'] = false; // No se puede usar desde interface
+        $defaultTypeMessage['userState']['class'] = "Sopinet\ChatBundle\Entity\MessageUserState";
+
         $rootNode
                 ->children()
                     ->booleanNode('anyType')->defaultFalse()->end()
