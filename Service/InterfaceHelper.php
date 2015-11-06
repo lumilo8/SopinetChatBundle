@@ -93,7 +93,9 @@ class InterfaceHelper
     /**
      * Create Chat from Users list
      * name - Chat name
+     * type - Type
      * chatMembers - Users id, separated by commas
+     * (anothers parameters)
      *
      * @param Request $request
      * @return Chat $chat
@@ -103,22 +105,38 @@ class InterfaceHelper
         // TODO: ¿Comprobar que el Admin va en chatMembers?
         // TODO: Comprobar que todos los usuarios existen y si no devolver error
 
+        /** @var ChatHelper $chatHelper */
+        $chatHelper = $this->container->get('sopinet_chatbundle_chathelper');
+
         /** @var ApiHelper $apiHelper */
         // TODO: Cambiar ApiHelper, mover
         $apiHelper = $this->container->get('sopinet_chatbundle_apihelper');
 
-        /** @var ChatHelper $chatHelper */
-        $chatHelper = $this->container->get('sopinet_chatbundle_chathelper');
+        /** @var Chat $chatClassObject */
         try {
-            $chatExist = $chatHelper->getChatExist($request);
+            $chatClassObject = $chatHelper->getChatClassObject($request->get('type'));
+        } catch(Exception $e) {
+            throw new Exception($e->getMessage());
+        }
+
+        try {
+            $chatExist = $chatClassObject->getMyChatExist($this->container, $request);
         } catch(Exception $e) {
             throw new Exception($e->getMessage());
         }
 
         if ($chatExist) return $chatExist;
 
-        $chat = new Chat();
-        $form = $this->container->get('form.factory')->create(new ChatType($this->container, $request), $chat);
+        $formClassString = $chatClassObject->getMyForm();
+        $formClassObject = new $formClassString($this->container, $request);
+        $form = $this->container->get('form.factory')->create($formClassObject, $chatClassObject);
+
+        /** @var Form $form */
+        // $form = $apiHelper->handleForm($request, $form);
+
+        //$chat = new Chat();
+        //$form = $this->container->get('form.factory')->create(new ChatType($this->container, $request), $chat);
+
         /** @var Form $form */
         try {
             $form = $apiHelper->handleForm($request, $form);
@@ -128,12 +146,12 @@ class InterfaceHelper
 
         if ($form->isValid()) {
             $em=$this->container->get('doctrine.orm.default_entity_manager');
-            $em->persist($chat);
+            $em->persist($chatClassObject);
             $em->flush();
 
-            return $chat;
+            return $chatClassObject;
         } else {
-            throw new Exception($apiHelper->getFormErrors($form));
+            throw new Exception($apiHelper->getFormErrors($form->getErrorsAsString()));
         }
     }
 

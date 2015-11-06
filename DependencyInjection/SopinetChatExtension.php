@@ -27,6 +27,8 @@ class SopinetChatExtension extends Extension
 
         $config['all_type_message'] = array_merge($config['extra_type_message'], $config['basic_type_message']);
 
+        $config['all_type_chat'] = $config['extra_type_chat']; // Aquí se podrían añadir los basic_type_chat cuando existan
+
         $container->setParameter(
             'sopinet_chat.config',
             $config

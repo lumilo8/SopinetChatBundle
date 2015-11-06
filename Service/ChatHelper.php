@@ -39,6 +39,53 @@ class ChatHelper
     }
 
     /**
+     * Get Chat class String from $type
+     *
+     * @param $type
+     * @return null|string
+     */
+    public function getChatClassString($type) {
+        /** @var EntityManager $em */
+        $em = $this->container->get('doctrine')->getManager();
+
+        $chatClass = "Sopinet\ChatBundle\Entity\Chat";
+
+        $cmf = $em->getMetadataFactory();
+        $meta = $cmf->getMetadataFor($chatClass);
+
+        $config = $this->container->getParameter('sopinet_chat.config');
+        foreach($meta->discriminatorMap as $typeString => $typeClass) {
+            if ($typeString == $type) {
+                return $typeClass;
+            }
+        }
+
+        // Type unknow
+        return null;
+    }
+
+    /**
+     * Get Chat class Object from $type
+     *
+     * @param $type
+     * @return mixed
+     * @throw If not found type
+     */
+    public function getChatClassObject($type = null) {
+        // Type is optional
+        if ($type == null) return new Chat();
+
+        $chatClassString = $this->getChatClassString($type);
+        if ($chatClassString == null) {
+            throw new Exception("Error Type");
+        }
+
+        $chatClassObject = new $chatClassString;
+
+        return $chatClassObject;
+    }
+
+    /**
      * Obtiene un Chat si existe
      * Se le pasan los usuarios en Request->get('chatMembers')
      * También se puede pasar el id del chat en Request->get('chat')
@@ -71,21 +118,19 @@ class ChatHelper
             if ($chat != null) return $chat;
         }
 
-        /** @var UserManager $userManager */
-        $userManager = $this->container->get('fos_user.user_manager');
-
-        $chatMembersString = $request->get('chatMembers');
-        $chatMembersArray = explode(',', $chatMembersString);
-        $users = array();
-        foreach($chatMembersArray as $chatMemberID) {
-            $chatMember = $userManager->findUserBy(array('id' => $chatMemberID));
-            if ($chatMember == null) return null;
-            $users[] = $chatMember;
+        /** @var Chat $chatClassObject */
+        try {
+            $chatClassObject = $this->getChatClassObject($request->get('type'));
+        } catch(Exception $e) {
+            throw new Exception($e->getMessage());
         }
 
-        /** @var ChatRepository $reChat */
-        $reChat = $em->getRepository('SopinetChatBundle:Chat');
+        try {
+            $chatExist = $chatClassObject->getMyChatExist($this->container, $request);
+        } catch(Exception $e) {
+            throw new Exception($e->getMessage());
+        }
 
-        return $reChat->getChatExist($users);
+        return $chatExist;
     }
 }

@@ -29,36 +29,43 @@ class DoctrineEventListener
             $class = new \ReflectionClass($metadata->getName());
         }
 
-        if ($class->getName() != "Sopinet\ChatBundle\Entity\Message") {
-            return;
-        }
-
         /** @var DiscriminatorMap $discriminatorMap */
         $discriminatorMap = array();
 
-        // Basic Types
-        foreach($this->config['basic_type_message'] as $keyType => $arrayType) {
-            if ($arrayType['enabled']) {
-                $class = $arrayType['class'];
-                $discriminatorMap[$keyType] = $class;
+        if ($class->getName() == "Sopinet\ChatBundle\Entity\Message") {
+            // Basic Types
+            foreach($this->config['basic_type_message'] as $keyType => $arrayType) {
+                if ($arrayType['enabled']) {
+                    $class = $arrayType['class'];
+                    $discriminatorMap[$keyType] = $class;
+                }
             }
-        }
 
-        // Extra Types
-        foreach($this->config['extra_type_message'] as $keyType => $arrayType) {
-            if ($arrayType['enabled']) {
-                $class = $arrayType['class'];
-                $discriminatorMap[$keyType] = $class;
+            // Extra Types
+            foreach($this->config['extra_type_message'] as $keyType => $arrayType) {
+                if ($arrayType['enabled']) {
+                    $class = $arrayType['class'];
+                    $discriminatorMap[$keyType] = $class;
+                }
             }
+
+            // Add any message Type?
+            if ($this->config['anyType']) {
+                $discriminatorMap['any'] = "Sopinet\ChatBundle\Entity\MessageAny";
+            }
+
+            $metadata->setDiscriminatorMap($discriminatorMap);
+        } else if ($class->getName() == "Sopinet\ChatBundle\Entity\Chat") {
+            // Extra Chats
+            foreach($this->config['extra_type_chat'] as $keyType => $arrayType) {
+                if ($arrayType['enabled']) {
+                    $class = $arrayType['class'];
+                    $discriminatorMap[$keyType] = $class;
+                }
+            }
+
+            $metadata->setDiscriminatorMap($discriminatorMap);
         }
-
-        // Add any message Type?
-        if ($this->config['anyType']) {
-            $discriminatorMap['any'] = "Sopinet\ChatBundle\Entity\MessageAny";
-        }
-
-        $metadata->setDiscriminatorMap($discriminatorMap);
-
 
         //$builder = new ClassMetadataBuilder($metadata);
         //$builder->create

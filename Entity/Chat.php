@@ -2,11 +2,14 @@
 namespace Sopinet\ChatBundle\Entity;
 
 use Application\Sonata\UserBundle\Entity\User;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Entity\UserManager;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\Exclude;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Entity Chat
@@ -14,6 +17,10 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table("sopinet_chatbundle_chat")
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
  * @ORM\Entity(repositoryClass="Sopinet\ChatBundle\Entity\ChatRepository")
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorColumn(name="type", type="string")
+ * @ORM\DiscriminatorMap({"chat" = "Chat"})
+ *
  */
 class Chat
 {
@@ -254,5 +261,64 @@ class Chat
         }
 
         return $devices;
+    }
+
+    /**
+     * Return type data
+     *
+     * @return string
+     */
+    public function getMyType() {
+        $className = get_class($this);
+        $classParts = explode("\\", $className);
+        $classSingle = $classParts[count($classParts) - 1];
+        $classLowSingle = strtolower($classSingle);
+        $type = str_replace("chat", "", $classLowSingle);
+
+        if (!$type) {
+            return "chat";
+        } else {
+            return $type;
+        }
+    }
+
+    /**
+     * FormClass for save and edit data from Chat entity
+     * Customizable
+     *
+     * @return string
+     */
+    public function getMyForm() {
+        return "\Sopinet\ChatBundle\Form\ChatType";
+    }
+
+    /**
+     * Return null or Chat
+     * If chat exists (parameters from Request, searching parameters customizable)
+     *
+     * @param $container
+     * @param Request $request
+     * @return null|Chat
+     */
+    public function getMyChatExist($container, Request $request) {
+        /** @var EntityManager $em */
+        $em = $container->get('doctrine')->getManager();
+
+        /** @var UserManager $userManager */
+        $userManager = $container->get('fos_user.user_manager');
+
+        $chatMembersString = $request->get('chatMembers');
+        $chatMembersArray = explode(',', $chatMembersString);
+        $users = array();
+        foreach($chatMembersArray as $chatMemberID) {
+            $chatMember = $userManager->findUserBy(array('id' => $chatMemberID));
+            if ($chatMember == null) return null;
+            $users[] = $chatMember;
+        }
+
+        /** @var ChatRepository $reChat */
+        $reChat = $em->getRepository('SopinetChatBundle:Chat');
+
+        return $reChat->getChatExist($users);
     }
 }

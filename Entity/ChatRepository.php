@@ -8,24 +8,6 @@ use \Application\Sonata\UserBundle\Entity\User as User;
 class ChatRepository extends EntityRepository
 {
     /**
-     * @param Integer $id
-     *
-     * @return bool
-     */
-    public function isNew($id)
-    {
-        $chat = $this->findOneById($id);
-
-        if ($chat != null) {
-            if ($chat->getId() === $id) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    /**
      * Función que comprueba si existe un chat y lo devuelve
      * para una serie de Usuarios pasados por parámetro
      * Si no existe devuelve null
@@ -50,6 +32,92 @@ class ChatRepository extends EntityRepository
     }
 
     /**
+     * Comprueba si un conjunto de Usuarios pertenecen a un Chat
+     * Devuelve true si todos están en Chat
+     * false en caso contrario
+     *
+     * @param $users
+     * @param Chat $chat
+     * @return bool
+     */
+    private function usersInChat($users, Chat $chat) {
+        if (count($users) == 0) return false;
+        foreach($users as $user) {
+            if (!$this->userInChat($user, $chat)) return false;
+        }
+        return true;
+    }
+
+    /**
+     * Comprueba si un usuario esta dentro de un chat
+     * @param User $user
+     * @param Chat $chat
+     * @return bool
+     */
+    private function userInChat(User $user,Chat $chat)
+    {
+        return in_array($user, $chat->getChatMembers()->toArray());
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /** TODO LO SIGUIENTE PARECE DEPRECATED **/
+
+
+
+
+
+
+
+
+
+
+    /**
+     *
+     *      DEPRECATED!!!
+     *
+     *
+     * @param Integer $id
+     *
+     * @return bool
+     */
+    private function isNewDEPRECATED($id)
+    {
+        $chat = $this->findOneById($id);
+
+        if ($chat != null) {
+            if ($chat->getId() === $id) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     *
+     *
+     *      DEPRECATED!!!
+     *
      * Función que modifica el Administrador de un Chat por otro
      *
      * @param Chat $chat
@@ -59,7 +127,7 @@ class ChatRepository extends EntityRepository
      *
      * @return bool
      */
-    public function modifyAdmin(Chat $chat, User $newAdminUser)
+    public function modifyAdminDEPRECATED(Chat $chat, User $newAdminUser)
     {
         $em = $this->getEntityManager();
 
@@ -87,6 +155,10 @@ class ChatRepository extends EntityRepository
     }
 
     /**
+     *
+     *      DEPRECATED!!!
+     *
+     *
      * Elimina a un usuario de un chat
      * TODO: Qué hacer si se intenta eliminar un usuario de un chat donde sólo hay dos usuarios
      *
@@ -100,7 +172,7 @@ class ChatRepository extends EntityRepository
      *
      * @return bool|Chat
      */
-    public function removeMember(Chat $chat, $userId)
+    public function removeMemberDEPRECATED(Chat $chat, $userId)
     {
         $em = $this->getEntityManager();
 
@@ -126,6 +198,13 @@ class ChatRepository extends EntityRepository
     }
 
     /**
+     *
+     *
+     *
+     *      DEPRECATED!!!
+     *
+     *
+     *
      * Añade un miembro a un chat
      *
      * @param Chat $chat - Entidad chat
@@ -135,7 +214,7 @@ class ChatRepository extends EntityRepository
      *
      * @return Chat|bool
      */
-    public function addMember(Chat $chat, $userId)
+    private function addMemberDEPRECATED(Chat $chat, $userId)
     {
         $em = $this->getEntityManager();
 
@@ -164,13 +243,18 @@ class ChatRepository extends EntityRepository
     }
 
     /**
+     *
+     *
+     *      DEPRECATED!!!
+     *
+     *
      * Marca un chat como borrado
      *
      * @param Chat $chat
      *
      * @return bool
      */
-    public function deleteChat(Chat $chat)
+    public function deleteChatDEPRECATED(Chat $chat)
     {
         $em = $this->getEntityManager();
         $em->remove($chat);
@@ -180,40 +264,15 @@ class ChatRepository extends EntityRepository
     }
 
     /**
-     * Comprueba si un conjunto de Usuarios pertenecen a un Chat
-     * Devuelve true si todos están en Chat
-     * false en caso contrario
      *
-     * @param $users
-     * @param Chat $chat
-     * @return bool
-     */
-    public function usersInChat($users, Chat $chat) {
-        if (count($users) == 0) return false;
-        foreach($users as $user) {
-            if (!$this->userInChat($user, $chat)) return false;
-        }
-        return true;
-    }
-
-    /**
-     * Comprueba si un usuario esta dentro de un chat
-     * @param User $user
-     * @param Chat $chat
-     * @return bool
-     */
-    public function userInChat(User $user,Chat $chat)
-    {
-        return in_array($user, $chat->getChatMembers()->toArray());
-    }
-
-    /**
+     *      DEPRECATED!!!
+     *
      * Devuelve todos los usuarios de un chat menos el pasado por parámetro
      *
      * @param User $user
      * @param Chat $chat
      */
-    public function getAnotherUsers(User $user, Chat $chat) {
+    private function getAnotherUsersDEPRECATED(User $user, Chat $chat) {
         $another = array();
         foreach($chat->getChatMembers() as $member) {
             if ($member->getUser()->getId() != $user->getId()) {
