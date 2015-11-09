@@ -166,6 +166,14 @@ class MessageHelper {
             $messageArray[$key] = $value;
         }
 
+        if ($message->getChat() != null) {
+            $chatData = $message->getChat()->getMyAddMessageObject($this->container);
+            $varsChat = get_object_vars($chatData);
+            foreach($varsChat as $key => $value) {
+                $messageArray[$key] = $value;
+            }
+        }
+
         if ($user != null) {
             $messageArray['toUserId'] = $user->getId();
         }

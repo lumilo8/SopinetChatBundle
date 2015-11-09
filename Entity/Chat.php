@@ -321,4 +321,13 @@ class Chat
 
         return $reChat->getChatExist($users);
     }
+
+    /**
+     * Add message information to MessageObject (for send) (customizable)
+     * @return \stdClass
+     */
+    public function getMyAddMessageObject($container){
+        $add = new \stdClass();
+        return $add;
+    }
 }
