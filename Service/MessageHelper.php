@@ -119,23 +119,37 @@ class MessageHelper {
                 // DEPRECATED! Next code is deprecated, now i pass message object for better iOS options
                 //$messageObject = $message->getMyMessageObject($this->container);
                 //$text = $message;
-                $response = $this->sendRealMessageToDevice($message, $device, $user);
+
                 $messagePackage = new MessagePackage();
                 $messagePackage->setMessage($message);
                 $messagePackage->setToDevice($device);
                 $messagePackage->setToUser($user);
-                if ($response) {
-                    $messagePackage->setStatus(MessagePackage::STATUS_OK);
-                } else {
-                    $messagePackage->setStatus(MessagePackage::STATUS_KO);
-                }
-                if ($device->getDeviceType() == Device::TYPE_ANDROID) {
-                    $messagePackage->setProcessed(true); // Yes, processed
-                } elseif ($device->getDeviceType() == Device::TYPE_IOS) {
-                    $messagePackage->setProcessed(false); // Not processed
-                }
+                $messagePackage->setStatus(MessagePackage::STATUS_PENDING);
                 $em->persist($messagePackage);
                 $em->flush();
+
+                // DO IN BACKGROUND
+                if (true) {
+                    $msg = array('messagePackageId' => $messagePackage->getId());
+                    $this->container->get('old_sound_rabbit_mq.send_message_package_producer')->setContentType('application/json');
+                    $this->container->get('old_sound_rabbit_mq.send_message_package_producer')->publish(json_encode($msg));
+                // NO BACKGROUND
+                } else {
+                    $response = $this->sendRealMessageToDevice($message, $device, $user);
+                    if ($response) {
+                        $messagePackage->setStatus(MessagePackage::STATUS_OK);
+                    } else {
+                        $messagePackage->setStatus(MessagePackage::STATUS_KO);
+                    }
+                    if ($device->getDeviceType() == Device::TYPE_ANDROID) {
+                        $messagePackage->setProcessed(true); // Yes, processed
+                    } elseif ($device->getDeviceType() == Device::TYPE_IOS) {
+                        $messagePackage->setProcessed(false); // Not processed
+                    }
+                    $em->persist($messagePackage);
+                    $em->flush();
+                }
+
                 $sentCount++;
             }
         }
@@ -150,11 +164,11 @@ class MessageHelper {
      * @param String $to
      *
      */
-    public function sendRealMessageToDevice(Message $message, Device $device, User $user = null)
+    public function sendRealMessageToDevice(Message $message, Device $device, User $user = null, Request $request = null)
     {
         $config = $this->container->getParameter('sopinet_chat.config');
 
-        $messageData = $message->getMyMessageObject($this->container);
+        $messageData = $message->getMyMessageObject($this->container, $request);
 
         $text = $message->__toString();
 

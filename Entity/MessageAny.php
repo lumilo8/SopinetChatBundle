@@ -31,7 +31,7 @@ class MessageAny extends Message
         return "\Sopinet\ChatBundle\Form\MessageType";
     }
 
-    public function getMyMessageObject($container){
+    public function getMyMessageObject($container, $request = NULL){
         $messageObject = parent::getMyMessageObject($container);
 
         $messageObject->type = $this->anyType;

@@ -169,7 +169,7 @@ abstract class Message
      * Convert Message (DataBase) to MessageObject (for send)
      * @return MessageObject
      */
-    public function getMyMessageObject($container){
+    public function getMyMessageObject($container, $request = null){
         $messageObject = new MessageObject();
         $messageObject->uniqMessageId = $this->getId();
         $messageObject->text = $this->getText();
@@ -191,7 +191,7 @@ abstract class Message
             $messageObject->fromPhone = $this->getFromUser()->getPhone();
             $messageObject->fromUsername = $this->getFromUser()->__toString();
             if ($this->getFromUser()->getFile() != null) {
-                $messageObject->fromUserPicture = $this->getFromUser()->getFile()->getHttpWebPath($container);
+                $messageObject->fromUserPicture = $this->getFromUser()->getFile()->getHttpWebPath($container, $request);
             } else {
                 // TODO: ¿Default Avatar? ¿In File?
                 $messageObject->fromUserPicture = null;
