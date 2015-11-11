@@ -166,7 +166,7 @@ class MessageHelper {
      * @param String $to
      *
      */
-    public function sendRealMessageToDevice(Message $message, Device $device, User $user = null, Request $request = null)
+    public function sendRealMessageToDevice(Message $message, Device $device, User $user = null, Request $request = null, $printOut = false)
     {
         $config = $this->container->getParameter('sopinet_chat.config');
 
@@ -192,6 +192,10 @@ class MessageHelper {
 
         if ($user != null) {
             $messageArray['toUserId'] = $user->getId();
+        }
+
+        if ($printOut) {
+            echo "Array Data Message: " . serialize($messageArray);
         }
 
         if ($device->getDeviceType() == Device::TYPE_ANDROID && $config['enabledAndroid']) {
