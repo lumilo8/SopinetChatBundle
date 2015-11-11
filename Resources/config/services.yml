@@ -24,6 +24,10 @@ services:
         class: Sopinet\ChatBundle\Service\MetricsHelper
         arguments: ["@service_container"]
 
+    sopinet_chatbundle_userhelper:
+        class: Sopinet\ChatBundle\Service\UserHelper
+        arguments: ["@service_container"]
+
     sopinet_chat.admin.chat:
         class: Sopinet\ChatBundle\Admin\ChatAdmin
         arguments: [~, Sopinet\ChatBundle\Entity\Chat, SonataAdminBundle:CRUD]
