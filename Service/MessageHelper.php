@@ -195,7 +195,8 @@ class MessageHelper {
         }
 
         if ($printOut) {
-            echo "Array Data Message: " . serialize($messageArray);
+            ldd($messageArray);
+            //echo "Array Data Message: " . serialize($messageArray);
         }
 
         if ($device->getDeviceType() == Device::TYPE_ANDROID && $config['enabledAndroid']) {
