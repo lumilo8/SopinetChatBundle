@@ -47,6 +47,7 @@ class SendMessagePackageConsumer implements ConsumerInterface
         /** @var MessagePackage $messagePackage */
         $messagePackage = $reMessagePackage->findOneById($messagePackageId);
         if ($messagePackage == null) return true;
+        if ($messagePackage->getMessage() == null) return true;
 
         $response = $messageHelper->sendRealMessageToDevice($messagePackage->getMessage(), $messagePackage->getToDevice(), $messagePackage->getToUser(), $this->request, true);
         if ($response) {
