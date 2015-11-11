@@ -36,7 +36,7 @@ class SendMessagePackageConsumer implements ConsumerInterface
     public function execute(AMQPMessage $msg)
     {
         $jsonBody = json_decode($msg->body);
-        if ($jsonBody == null) return;
+        if ($jsonBody == null) return true;
         $messagePackageId = json_decode($msg->body)->messagePackageId;
 
         /** @var EntityManager $em */
@@ -61,8 +61,6 @@ class SendMessagePackageConsumer implements ConsumerInterface
         $em->persist($messagePackage);
         $em->flush();
 
-        echo $response;
-
-        return $response;
+        return true;
     }
 }
