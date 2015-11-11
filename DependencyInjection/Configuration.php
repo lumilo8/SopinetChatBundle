@@ -51,6 +51,7 @@ class Configuration implements ConfigurationInterface
                     ->booleanNode('enabledAndroid')->defaultTrue()->end()
                     ->booleanNode('enabledIOS')->defaultTrue()->end()
 					->booleanNode('enabledWeb')->defaultTrue()->end()
+                    ->booleanNode('background')->defaultFalse()->end()
                     ->scalarNode('soundIOS')->defaultValue('default')->end()
                     ->arrayNode('extra_type_chat')
                         ->prototype('array')

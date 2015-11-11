@@ -111,6 +111,8 @@ class MessageHelper {
     }
 
     public function sendMessageToUser(Message $message, User $user) {
+        $config = $this->container->getParameter('sopinet_chat.config');
+
         $sentCount = 0;
         $em = $this->container->get('doctrine.orm.default_entity_manager');
         /** @var Device $device */
@@ -129,7 +131,7 @@ class MessageHelper {
                 $em->flush();
 
                 // DO IN BACKGROUND
-                if (true) {
+                if ($config['background']) {
                     $msg = array('messagePackageId' => $messagePackage->getId());
                     $this->container->get('old_sound_rabbit_mq.send_message_package_producer')->setContentType('application/json');
                     $this->container->get('old_sound_rabbit_mq.send_message_package_producer')->publish(json_encode($msg));
