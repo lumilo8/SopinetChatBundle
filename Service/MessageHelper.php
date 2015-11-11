@@ -195,7 +195,7 @@ class MessageHelper {
         }
 
         if ($printOut) {
-            ldd($messageArray);
+            ld($messageArray);
             //echo "Array Data Message: " . serialize($messageArray);
         }
 
