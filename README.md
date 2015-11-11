@@ -214,6 +214,10 @@ Se puede activar el comando "sopinet:chatBundle:checkUserState" de forma recursi
 
 (habilitar configuración de websocket)
 TODO:
+
+```
+php app/console gos:websocket:server
+```
  
 
 ## RabbitMQ
