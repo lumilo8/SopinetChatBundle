@@ -78,3 +78,9 @@ services:
         arguments: [~, Sopinet\ChatBundle\Entity\UserState, SonataAdminBundle:CRUD]
         tags:
             - { name: sonata.admin, manager_type: orm, group: SopinetChat, label: UserState }
+
+    sopinet_chatbundle_sendMessagePackage:
+        class:  Sopinet\ChatBundle\Service\Consumer\SendMessagePackageConsumer
+        arguments:  ['@service_container']
+        calls:
+            - [setRequest, [@request_stack]]
