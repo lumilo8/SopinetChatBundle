@@ -46,6 +46,7 @@ class SendMessagePackageConsumer implements ConsumerInterface
         $reMessagePackage = $em->getRepository('SopinetChatBundle:MessagePackage');
         /** @var MessagePackage $messagePackage */
         $messagePackage = $reMessagePackage->findOneById($messagePackageId);
+        if ($messagePackage == null) return null;
 
         $response = $messageHelper->sendRealMessageToDevice($messagePackage->getMessage(), $messagePackage->getToDevice(), $messagePackage->getToUser(), $this->request, true);
         if ($response) {
