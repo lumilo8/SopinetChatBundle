@@ -65,7 +65,7 @@ class Chat
 
     /**
      * @ORM\OneToMany(targetEntity="Message", mappedBy="chat", cascade={"persist"})
-     * @ORM\OrderBy({"id" = "DESC"})
+     * @ORM\OrderBy({"createdAt" = "DESC"})
      * @Exclude
      */
     protected $messages;
