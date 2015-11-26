@@ -43,4 +43,8 @@ class MessageUserState extends Message
 
         return $toUsers;
     }
+
+    public function getMyIOSContentAvailable() {
+        return false;
+    }
 }
