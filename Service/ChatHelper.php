@@ -33,6 +33,10 @@ use Symfony\Component\Form\Form;
  */
 class ChatHelper
 {
+
+    const NOT_EXIST = "Chat no exist";
+    const NOT_USER_EXIST = "User no exist in this chat";
+
     public function __construct(Container $container)
     {
         $this->container = $container;

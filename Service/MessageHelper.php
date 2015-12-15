@@ -135,7 +135,7 @@ class MessageHelper {
                     $msg = array('messagePackageId' => $messagePackage->getId());
                     $this->container->get('old_sound_rabbit_mq.send_message_package_producer')->setContentType('application/json');
                     $this->container->get('old_sound_rabbit_mq.send_message_package_producer')->publish(json_encode($msg));
-                // NO BACKGROUND
+                    // NO BACKGROUND
                 } else {
                     $response = $this->sendRealMessageToDevice($message, $device, $user);
                     if ($response) {
@@ -286,14 +286,14 @@ class MessageHelper {
         if ($contentAvailable) {
             /**
             if ($mes['chattype']=='event') {
-                $em = $this->container->get("doctrine.orm.entity_manager");
-                $reChat = $em->getRepository('PetyCashAppBundle:Chat');
-                $chat = $reChat->find($mes['chatid']);
-                $text = $chat->getName().'@'.$user->getUserName();
+            $em = $this->container->get("doctrine.orm.entity_manager");
+            $reChat = $em->getRepository('PetyCashAppBundle:Chat');
+            $chat = $reChat->find($mes['chatid']);
+            $text = $chat->getName().'@'.$user->getUserName();
             } else {
-                $text = $user->getUserName();
+            $text = $user->getUserName();
             }
-            **/
+             **/
 
             //nombredelChat@nombredeUsuario;
             $messageString = $notificationFields;

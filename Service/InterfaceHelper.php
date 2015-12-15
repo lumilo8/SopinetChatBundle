@@ -352,4 +352,58 @@ class InterfaceHelper
 
         return $notify;
     }
+
+    /**
+     * Clear unread messages in a chat from a user
+     * - Email (email)
+     * - Password (password)
+     * - Chat (chat id)
+     *
+     * @param Request $request
+     */
+    public function cleanUnreadMessages(Request $request) {
+        // Get toUser
+        /** @var LoginHelper $loginHelper */
+        $loginHelper = $this->container->get('sopinet_login_helper');
+        /** @var User $user */
+        try {
+            $user = $loginHelper->getUser($request);
+        } catch(Exception $e) {
+            throw new Exception('User is required');
+        }
+
+        /** @var EntityManager $em */
+        $em = $this->container->get('doctrine.orm.default_entity_manager');
+
+        /** @var ChatRepository $chatRepository */
+        $chatRepository = $em->getRepository('SopinetChatBundle:Chat');
+
+        /** @var Chat $chat */
+        $chat = $chatRepository->findOneById($request->get('chat'));
+
+        if(!$chat){
+            throw new Exception(ChatHelper::NOT_EXIST);
+        }
+
+        $userInChat = $chatRepository->userInChat($user, $chat);
+
+        if(!$userInChat){
+            throw new Exception(ChatHelper::NOT_USER_EXIST);
+        }
+
+        /** @var Message $messageRepository */
+        $messageRepository = $em->getRepository('SopinetChatBundle:Message');
+
+        $messages = $messageRepository->findBy( array("fromUser" => $user, "read" => "false") );
+
+        /** @var Message $message */
+        foreach($messages as $message){
+            $message->setRead(true);
+            $em->persist($message);
+        }
+
+        $em->flush();
+
+        return $chat;
+    }
 }

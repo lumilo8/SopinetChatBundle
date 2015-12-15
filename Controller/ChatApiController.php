@@ -214,4 +214,35 @@ class ChatApiController extends FOSRestController{
 
         return $apiHelper->responseOk($messagePackage, "create");
     }
+
+    /**
+     *
+     * @ApiDoc(
+     *   description="Clean unread messages.",
+     *   section="SopinetChat",
+     *   parameters={
+     *      {"name"="email", "dataType"="string", "required"=false, "description"="Correo electrónico del usuario."},
+     *      {"name"="password", "dataType"="string", "required"=false, "description"="Contraseña del usuario (en texto plano sin codificar)."},
+     *      {"name"="chat", "dataType"="string", "required"=true, "description"="ID del Chat en el servidor en el que se envía el mensaje"}
+     *   }
+     * )
+     *
+     * @Post("cleanUnreadMessages")
+     */
+    public function cleanUnreadMessagesAction(Request $request) {
+        /** @var InterfaceHelper $interfaceHelper */
+        $interfaceHelper = $this->get('sopinet_chatbundle_interfacehelper');
+
+        /** @var ApiHelper $apiHelper */
+        // TODO: Cambiar APIHELPER, Mover
+        $apiHelper = $this->get('sopinet_chatbundle_apihelper');
+
+        try {
+            $chat = $interfaceHelper->cleanUnreadMessages($request);
+        } catch (Exception $e) {
+            return $apiHelper->responseDenied($e->getMessage());
+        }
+
+        return $apiHelper->responseOk($chat, "clean");
+    }
 }

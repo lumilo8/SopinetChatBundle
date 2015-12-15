@@ -54,7 +54,7 @@ class ChatRepository extends EntityRepository
      * @param Chat $chat
      * @return bool
      */
-    private function userInChat(User $user,Chat $chat)
+    public function userInChat(User $user,Chat $chat)
     {
         return in_array($user, $chat->getChatMembers()->toArray());
     }
