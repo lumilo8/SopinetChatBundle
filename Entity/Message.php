@@ -170,12 +170,12 @@ abstract class Message
         return $this->fromUser;
     }
 
-    /** Set read
+    /** Set readed
      *
-     * @param boolean $read
+     * @param $read
      * @return Message
      */
-    public function setRead($read)
+    public function setReaded($read)
     {
         $this->readed = $read;
 
@@ -183,11 +183,11 @@ abstract class Message
     }
 
     /**
-     * Get read
+     * Get readed
      *
      * @return boolean
      */
-    public function getRead()
+    public function getReaded()
     {
         return $this->readed;
     }

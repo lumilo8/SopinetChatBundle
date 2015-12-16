@@ -398,7 +398,7 @@ class InterfaceHelper
 
         /** @var Message $message */
         foreach($messages as $message){
-            $message->setRead(1);
+            $message->setReaded(1);
             $em->persist($message);
         }
 
