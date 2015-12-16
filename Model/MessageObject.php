@@ -23,7 +23,5 @@ class MessageObject {
     public $fromUserPicture; // from Picture User
 
     public $fromUserId; // user id
-
-    public $read;
 }
 ?>

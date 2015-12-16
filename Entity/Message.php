@@ -203,11 +203,6 @@ abstract class Message
         $messageObject->type = $this->getMyType();
         $messageObject->fromTime = $this->getFromTime()->getTimestamp();
 
-        // If read not null
-        if ($this->getRead() != null) {
-            $messageObject->read = $this->getRead();
-        };
-
         // If chat not null
         if ($this->getChat() != null) {
             $messageObject->chatId = $this->getChat()->getId();
