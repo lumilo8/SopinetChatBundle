@@ -75,7 +75,7 @@ abstract class Message
     /**
      * @ORM\Column(name="read", type="boolean", nullable=true)
      */
-    protected $read;
+    protected $read=false;
 
     public function setTypeClient($typeClient) {
         $this->typeClient = $typeClient;
