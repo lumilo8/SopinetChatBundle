@@ -73,9 +73,9 @@ abstract class Message
     protected $typeClient;
 
     /**
-     * @ORM\Column(name="read", type="boolean", nullable=true)
+     * @ORM\Column(name="readed", type="boolean", nullable=true, options={"default" = 0})
      */
-    protected $read=false;
+    protected $readed;
 
     public function setTypeClient($typeClient) {
         $this->typeClient = $typeClient;
@@ -177,7 +177,7 @@ abstract class Message
      */
     public function setRead($read)
     {
-        $this->read = $read;
+        $this->readed = $read;
 
         return $this;
     }
@@ -189,7 +189,7 @@ abstract class Message
      */
     public function getRead()
     {
-        return $this->read;
+        return $this->readed;
     }
 
     /**
