@@ -394,7 +394,7 @@ class InterfaceHelper
         /** @var Message $messageRepository */
         $messageRepository = $em->getRepository('SopinetChatBundle:Message');
 
-        $messages = $messageRepository->findBy( array("fromUser" => $user, "read" => "false") );
+        $messages = $messageRepository->findBy( array("fromUser" => $user, "readed" => "false") );
 
         /** @var Message $message */
         foreach($messages as $message){
