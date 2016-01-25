@@ -10,10 +10,10 @@ use JMS\Serializer\Annotation\Groups;
 use Doctrine\ORM\Event\OnFlushEventArgs;
 
 /**
-* @ORM\Entity(repositoryClass="Sopinet\ChatBundle\Entity\DeviceRepository")
-* @ORM\Table(name="sopinet_chatbundle_device")
-* @DoctrineAssert\UniqueEntity("deviceId")
-*/
+ * @ORM\Entity(repositoryClass="Sopinet\ChatBundle\Entity\DeviceRepository")
+ * @ORM\Table(name="sopinet_chatbundle_device")
+ * @DoctrineAssert\UniqueEntity("deviceId")
+ */
 class Device
 {
     use ORMBehaviors\Timestampable\Timestampable;
@@ -65,6 +65,11 @@ class Device
      * @ORM\Column(name="type", type="string", columnDefinition="enum('iOS','Android','Web')")
      */
     protected $deviceType;
+
+    /**
+     * @ORM\Column(type="string", columnDefinition="ENUM('0', '1')")
+     */
+    protected $state;
 
     public function setDeviceId($deviceId)
     {
@@ -124,6 +129,7 @@ class Device
     public function __construct()
     {
         $this->user = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->setState('1');
     }
 
     /**
@@ -152,7 +158,7 @@ class Device
     /**
      * Get user
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getUser()
     {
@@ -248,5 +254,28 @@ class Device
     public function removeMessagesPackageReceived(\Sopinet\ChatBundle\Entity\MessagePackage $messagesPackageReceived)
     {
         $this->messagesPackageReceived->removeElement($messagesPackageReceived);
+    }
+
+    /**
+     * Set state
+     *
+     * @param string $state
+     * @return UserState
+     */
+    public function setState($state)
+    {
+        $this->state = $state;
+
+        return $this;
+    }
+
+    /**
+     * Get state
+     *
+     * @return string
+     */
+    public function getState()
+    {
+        return $this->state;
     }
 }

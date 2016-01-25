@@ -117,7 +117,7 @@ class MessageHelper {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
         /** @var Device $device */
         foreach($user->getDevices() as $device) {
-            if ($message->getFromDevice() == null || $message->getFromDevice()->getDeviceId() != $device->getDeviceId()) {
+            if (($message->getFromDevice() == null || $message->getFromDevice()->getDeviceId() != $device->getDeviceId()) && $device->getState() == '1') {
                 // DEPRECATED! Next code is deprecated, now i pass message object for better iOS options
                 //$messageObject = $message->getMyMessageObject($this->container);
                 //$text = $message;

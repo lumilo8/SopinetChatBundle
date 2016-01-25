@@ -40,8 +40,9 @@ class WebClientEventListener
         $reDevice = $em->getRepository('SopinetChatBundle:Device');
         $device = $reDevice->findOneByDeviceId($conn->WAMP->sessionId);
         if ($device) {
-            echo "Removed device with SessionID: ".$device->getDeviceId() . PHP_EOL;
-            $em->remove($device);
+            echo "State to 0 in device with SessionID: ".$device->getDeviceId() . PHP_EOL;
+            $device->setState('0');
+            $em->flush($device);
             $em->flush();
         } else {
             echo "Device not was registered ¿?" . PHP_EOL;
@@ -82,8 +83,9 @@ class WebClientEventListener
         $devices = $reDevice->findByDeviceType(Device::TYPE_WEB);
         /** @var Device $device */
         foreach($devices as $device) {
-            echo "Removed device with SessionID: ".$device->getDeviceId() . PHP_EOL;
-            $em->remove($device);
+            echo "State to 0 in device with SessionID: ".$device->getDeviceId() . PHP_EOL;
+            $device->setState('0');
+            $em->flush($device);
             $em->flush();
         }
 
