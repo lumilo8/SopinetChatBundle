@@ -35,9 +35,17 @@ class SendMessagePackageConsumer implements ConsumerInterface
      */
     public function execute(AMQPMessage $msg)
     {
+
+        $logger = $this->container->get("logger");
+
         $jsonBody = json_decode($msg->body);
-        if ($jsonBody == null) return true;
+        if ($jsonBody == null){
+            $logger->error("JSON NULL");
+            return false;
+        }
         $messagePackageId = json_decode($msg->body)->messagePackageId;
+
+        $logger->error('tGuardado correctamente 1: ' . $messagePackageId);
 
         /** @var EntityManager $em */
         $em = $this->container->get('doctrine.orm.default_entity_manager');
@@ -46,8 +54,10 @@ class SendMessagePackageConsumer implements ConsumerInterface
         $reMessagePackage = $em->getRepository('SopinetChatBundle:MessagePackage');
         /** @var MessagePackage $messagePackage */
         $messagePackage = $reMessagePackage->findOneById($messagePackageId);
-        if ($messagePackage == null) return true;
-        if ($messagePackage->getMessage() == null) return true;
+        if ($messagePackage == null) return false;
+        if ($messagePackage->getMessage() == null) return false;;
+
+        $logger->error('Guardado correctamente 2: ' . $messagePackageId);
 
         $response = $messageHelper->sendRealMessageToDevice($messagePackage->getMessage(), $messagePackage->getToDevice(), $messagePackage->getToUser(), $this->request, true);
         if ($response) {
@@ -60,8 +70,12 @@ class SendMessagePackageConsumer implements ConsumerInterface
         } elseif ($messagePackage->getToDevice()->getDeviceType() == Device::TYPE_IOS) {
             $messagePackage->setProcessed(false); // Not processed
         }
+
+        $logger->error('Guardado correctamente 3: ' . $messagePackageId);
+
         $em->persist($messagePackage);
         $em->flush();
+
 
         return true;
     }
