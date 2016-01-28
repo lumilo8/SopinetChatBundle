@@ -125,7 +125,16 @@ class InterfaceHelper
             throw new Exception($e->getMessage());
         }
 
-        if ($chatExist) return $chatExist;
+        if ($chatExist){
+
+            $em = $this->container->get('doctrine.orm.default_entity_manager');
+
+            /** @var ChatRepository $repositoryChat */
+            $repositoryChat = $em->getRepository('SopinetChatBundle:Chat');
+            $repositoryChat->enabledChat($chatExist);
+
+            return $chatExist;
+        }
 
         $formClassString = $chatClassObject->getMyForm();
         $formClassObject = new $formClassString($this->container, $request);
@@ -394,7 +403,7 @@ class InterfaceHelper
         /** @var Message $messageRepository */
         $messageRepository = $em->getRepository('SopinetChatBundle:Message');
 
-        $messages = $messageRepository->findBy( array("fromUser" => $user, "readed" => 0) );
+        $messages = $messageRepository->findBy( array("chat" => $chat, "readed" => 0) );
 
         /** @var Message $message */
         foreach($messages as $message){

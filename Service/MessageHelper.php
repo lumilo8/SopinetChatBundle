@@ -183,6 +183,12 @@ class MessageHelper {
         }
 
         if ($message->getChat() != null) {
+            $em = $this->container->get('doctrine.orm.default_entity_manager');
+
+            /** @var ChatRepository $repositoryChat */
+            $repositoryChat = $em->getRepository('SopinetChatBundle:Chat');
+            $repositoryChat->enabledChat($message->getChat());
+
             $chatData = $message->getChat()->getMyAddMessageObject($this->container);
             $varsChat = get_object_vars($chatData);
             foreach($varsChat as $key => $value) {

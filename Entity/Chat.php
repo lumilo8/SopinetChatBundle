@@ -71,11 +71,17 @@ class Chat
     protected $messages;
 
     /**
+     * @ORM\Column(name="enabled", type="boolean", nullable=true, options={"default" = 1})
+     */
+    protected $enabled;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->name = "";
+        $this->enabled = true;
         $this->chatMembers = new \Doctrine\Common\Collections\ArrayCollection();
         $this->messages = new \Doctrine\Common\Collections\ArrayCollection();
     }
@@ -329,5 +335,27 @@ class Chat
     public function getMyAddMessageObject($container){
         $add = new \stdClass();
         return $add;
+    }
+
+    /** Set enabled
+     *
+     * @param $enabled
+     * @return Chat
+     */
+    public function setEnabled($enabled)
+    {
+        $this->enabled = $enabled;
+
+        return $this;
+    }
+
+    /**
+     * Get enabled
+     *
+     * @return boolean
+     */
+    public function getEnabled()
+    {
+        return $this->enabled;
     }
 }

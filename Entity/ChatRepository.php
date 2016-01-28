@@ -281,4 +281,18 @@ class ChatRepository extends EntityRepository
         }
         return $another;
     }
+
+    /**
+     * Function to enabled chat
+     * @param Chat $chat
+     */
+    public function enabledChat(Chat $chat){
+
+        $em = $this->getEntityManager();
+
+        $chat->setEnabled(true);
+
+        $em->persist($chat);
+        $em->flush();
+    }
 }
