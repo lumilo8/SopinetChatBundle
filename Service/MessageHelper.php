@@ -105,7 +105,9 @@ class MessageHelper {
         $users = $message->getMyDestionationUsers($this->container);
         $sentCount = 0;
         foreach($users as $user) {
+            //if($user->getId() != $message->getFromUser()->getId()){
             $sentCount += $this->sendMessageToUser($message, $user);
+            //}
         }
         return $sentCount;
     }

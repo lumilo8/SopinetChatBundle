@@ -126,13 +126,6 @@ class InterfaceHelper
         }
 
         if ($chatExist){
-
-            $em = $this->container->get('doctrine.orm.default_entity_manager');
-
-            /** @var ChatRepository $repositoryChat */
-            $repositoryChat = $em->getRepository('SopinetChatBundle:Chat');
-            $repositoryChat->enabledChat($chatExist);
-
             return $chatExist;
         }
 

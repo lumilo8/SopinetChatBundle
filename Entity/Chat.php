@@ -81,7 +81,7 @@ class Chat
     public function __construct()
     {
         $this->name = "";
-        $this->enabled = true;
+        $this->enabled = false;
         $this->chatMembers = new \Doctrine\Common\Collections\ArrayCollection();
         $this->messages = new \Doctrine\Common\Collections\ArrayCollection();
     }

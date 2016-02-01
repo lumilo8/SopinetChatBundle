@@ -286,7 +286,6 @@ abstract class Message
      */
     public function __construct()
     {
-        $this->setReaded(false);
         $this->messagesGenerated = new \Doctrine\Common\Collections\ArrayCollection();
         $this->typeClient = $this->getMyType();
     }
