@@ -78,4 +78,4 @@ services:
         class:  Sopinet\ChatBundle\Service\Consumer\SendMessagePackageConsumer
         arguments:  ['@service_container']
         calls:
-            - [setRequest, [@request_stack]]
+            - [setRequest, ["@request_stack"]]
