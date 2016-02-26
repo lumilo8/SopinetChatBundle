@@ -6,3 +6,5 @@ TODO:
 ```
 ./app/console rabbitmq:consumer send_message_package
 ```
+
+[Volver al índice](README.md)

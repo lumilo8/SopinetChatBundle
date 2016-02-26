@@ -10,3 +10,4 @@ sonata_admin:
             - { position: left, type: sonata.admin.block.admin_list, settings: { groups: [SopinetChat] } }
 ```
 
+[Volver al índice](README.md)

@@ -17,3 +17,5 @@ Se puede activar el comando "sopinet:chatBundle:checkUserState" de forma recursi
 ```
 	* * * * * php /var/www/symfony-project/app/console sopinet:chatBundle:checkUserState 60
 ```
+
+[Volver al índice](README.md)
