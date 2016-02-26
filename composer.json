@@ -19,7 +19,7 @@
   ],
   "require": {
     "php": ">=5.4.0",
-    "sopinet/apihelper-bundle": "dev-master"
+    "sopinet/apihelper-bundle": "1.0"
   },
   "autoload": {
     "psr-0": { "Sopinet\\ChatBundle": "" }
