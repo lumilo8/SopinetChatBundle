@@ -14,7 +14,7 @@ use Sopinet\ChatBundle\Entity\Message;
 use Sopinet\ChatBundle\Entity\MessageImage;
 use Sopinet\ChatBundle\Entity\MessageText;
 use Sopinet\ChatBundle\Form\ChatType;
-use Sopinet\ChatBundle\Service\ApiHelper;
+use SopinetApiHelperBundle\Services\ApiHelper;
 use Sopinet\ChatBundle\Service\ChatHelper;
 use Sopinet\ChatBundle\Service\InterfaceHelper;
 use Sopinet\ChatBundle\Entity\Device;
@@ -85,8 +85,7 @@ class ChatApiController extends FOSRestController{
         $interfaceHelper = $this->get('sopinet_chatbundle_interfacehelper');
 
         /** @var ApiHelper $apiHelper */
-        // TODO: Cambiar APIHELPER, Mover
-        $apiHelper = $this->get('sopinet_chatbundle_apihelper');
+        $apiHelper = $this->get('sopinet_apihelperbundle_apihelper');
 
         try {
             $message = $interfaceHelper->sendMessage($request);
@@ -115,8 +114,7 @@ class ChatApiController extends FOSRestController{
         $interfaceHelper = $this->get('sopinet_chatbundle_interfacehelper');
 
         /** @var ApiHelper $apiHelper */
-        // TODO: Cambiar APIHELPER, Mover
-        $apiHelper = $this->get('sopinet_chatbundle_apihelper');
+        $apiHelper = $this->get('sopinet_apihelperbundle_apihelper');
 
         try {
             $chat = $interfaceHelper->createChat($request);
@@ -144,8 +142,7 @@ class ChatApiController extends FOSRestController{
         /** @var InterfaceHelper $interfaceHelper */
         $interfaceHelper = $this->get('sopinet_chatbundle_interfacehelper');
         /** @var ApiHelper $apiHelper */
-        // TODO: Cambiar APIHELPER, Mover
-        $apiHelper = $this->get('sopinet_chatbundle_apihelper');
+        $apiHelper = $this->get('sopinet_apihelperbundle_apihelper');
 
         try {
             $device = $interfaceHelper->addDevice($request);
@@ -173,8 +170,7 @@ class ChatApiController extends FOSRestController{
         $interfaceHelper = $this->get('sopinet_chatbundle_interfacehelper');
 
         /** @var ApiHelper $apiHelper */
-        // TODO: Cambiar APIHELPER, Mover
-        $apiHelper = $this->get('sopinet_chatbundle_apihelper');
+        $apiHelper = $this->get('sopinet_apihelperbundle_apihelper');
 
         try {
             $count = $interfaceHelper->sendUnprocessNotification($request);
@@ -203,8 +199,7 @@ class ChatApiController extends FOSRestController{
         $interfaceHelper = $this->get('sopinet_chatbundle_interfacehelper');
 
         /** @var ApiHelper $apiHelper */
-        // TODO: Cambiar APIHELPER, Mover
-        $apiHelper = $this->get('sopinet_chatbundle_apihelper');
+        $apiHelper = $this->get('sopinet_apihelperbundle_apihelper');
 
         try {
             $messagePackage = $interfaceHelper->cleanUnprocessNotification($request);
@@ -234,8 +229,7 @@ class ChatApiController extends FOSRestController{
         $interfaceHelper = $this->get('sopinet_chatbundle_interfacehelper');
 
         /** @var ApiHelper $apiHelper */
-        // TODO: Cambiar APIHELPER, Mover
-        $apiHelper = $this->get('sopinet_chatbundle_apihelper');
+        $apiHelper = $this->get('sopinet_apihelperbundle_apihelper');
 
         try {
             $chat = $interfaceHelper->cleanUnreadMessages($request);

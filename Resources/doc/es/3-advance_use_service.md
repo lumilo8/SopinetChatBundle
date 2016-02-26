@@ -27,8 +27,8 @@ class MyCustomApiChatController extends FOSRestController
         /** Interface de LoginHelper genérica **/
         $loginHelper = $this->get('sopinet_login_helper');
         
-        /** ApiHelper, pendiente de modularizar! */
-        $apiHelper = $this->get('apihelper');
+        /** ApiHelper */
+        $apiHelper = $this->get('sopinet_apihelperbundle_apihelper');
 
         /** @var User $user */
         try {

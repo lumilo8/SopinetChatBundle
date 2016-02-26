@@ -1,9 +1,4 @@
 services:
-    sopinet_chatbundle_apihelper:
-        class: Sopinet\ChatBundle\Service\ApiHelper
-        arguments: ["@doctrine.orm.entity_manager", "@fos_rest.view_handler"]
-
-
     sopinet_chatbundle_chathelper:
         class: Sopinet\ChatBundle\Service\ChatHelper
         arguments: ["@service_container"]

@@ -25,6 +25,7 @@ use FOS\RestBundle\View\View;
 use Doctrine\ORM\EntityManager;
 use JMS\Serializer\SerializationContext;
 use Symfony\Component\Security\Acl\Exception\Exception;
+use SopinetApiHelperBundle\Services\ApiHelper;
 
 /**
  * Class InterfaceHelper
@@ -55,8 +56,7 @@ class InterfaceHelper
         $messageHelper = $this->container->get('sopinet_chatbundle_messagehelper');
 
         /** @var ApiHelper $apiHelper */
-        // TODO: Cambiar ApiHelper, mover
-        $apiHelper = $this->container->get('sopinet_chatbundle_apihelper');
+        $apiHelper = $this->container->get('sopinet_apihelperbundle_apihelper');
 
         /** @var Message $messageClassObject */
         try {
@@ -109,8 +109,7 @@ class InterfaceHelper
         $chatHelper = $this->container->get('sopinet_chatbundle_chathelper');
 
         /** @var ApiHelper $apiHelper */
-        // TODO: Cambiar ApiHelper, mover
-        $apiHelper = $this->container->get('sopinet_chatbundle_apihelper');
+        $apiHelper = $this->container->get('sopinet_apihelperbundle_apihelper');
 
         /** @var Chat $chatClassObject */
         try {
@@ -181,8 +180,7 @@ class InterfaceHelper
         /** @var Form $form */
         $form = $this->container->get('form.factory')->create(new DeviceType($this->container, $request, $device), $device);
         /** @var ApiHelper $apiHelper */
-        // TODO: Cambiar APIHELPER, Mover
-        $apiHelper = $this->container->get('sopinet_chatbundle_apihelper');
+        $apiHelper = $this->container->get('sopinet_apihelperbundle_apihelper');
         $form = $apiHelper->handleForm($request, $form);
         // Comprobar que TYPE sólo sea iOS o Android
         if ($form->isValid()) {
