@@ -8,6 +8,7 @@ use SopinetApiHelperBundle\Services\ApiHelper;
 use Sopinet\ChatBundle\Service\InterfaceHelper;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Acl\Exception\Exception;
+use FOS\RestBundle\Controller\Annotations\Route;
 
 
 class ChatApiController extends FOSRestController{
@@ -15,6 +16,7 @@ class ChatApiController extends FOSRestController{
      * @Get("debug")
      */
     public function debugAction() {
+        die("debugAction");
         $chatHelper = $this->get('sopinet_chatbundle_messagehelper');
 
         /** @var Message $messageClassObject */
