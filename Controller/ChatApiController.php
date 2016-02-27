@@ -9,7 +9,9 @@ use Sopinet\ChatBundle\Service\InterfaceHelper;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Acl\Exception\Exception;
 use FOS\RestBundle\Controller\Annotations\Route;
-
+use FOS\RestBundle\Controller\Annotations\Get;
+use FOS\RestBundle\Controller\Annotations\Post;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
 class ChatApiController extends FOSRestController{
     /**
