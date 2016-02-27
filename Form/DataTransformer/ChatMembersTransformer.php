@@ -39,7 +39,7 @@ class ChatMembersTransformer implements DataTransformerInterface
 
         $uObjectArray = array();
         foreach($uIDArray as $uID) {
-            $user = $userManager->findUserById($uID);
+            $user = $userManager->findUserBy(array('id' => $uID));
             if ($user) {
                 $uObjectArray[] = $user;
             } else {
