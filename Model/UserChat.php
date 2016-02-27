@@ -163,7 +163,7 @@ trait UserChat
      *
      * @param \Sopinet\ChatBundle\Entity\UserState $userState
      *
-     * @return \Sopinet\ChatBundle\Model\UserInterface User
+     * @return User
      */
     public function setUserState(\Sopinet\ChatBundle\Entity\UserState $userState = null)
     {

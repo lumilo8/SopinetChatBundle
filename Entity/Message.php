@@ -150,10 +150,10 @@ abstract class Message
     /**
      * Set fromUser
      *
-     * @param \Sopinet\ChatBundle\Model\UserInterface $fromUser
+     * @param User $fromUser
      * @return Message
      */
-    public function setFromUser(\Sopinet\ChatBundle\Model\UserInterface $fromUser = null)
+    public function setFromUser($fromUser = null)
     {
         $this->fromUser = $fromUser;
 
@@ -163,7 +163,7 @@ abstract class Message
     /**
      * Get user
      *
-     * @return \Sopinet\ChatBundle\Model\UserInterface
+     * @return User
      */
     public function getFromUser()
     {

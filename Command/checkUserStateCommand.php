@@ -10,7 +10,6 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Sopinet\ChatBundle\Model\UserInterface as User;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RequestContext;
 
@@ -38,7 +37,6 @@ class checkUserStateCommand extends ContainerAwareCommand
         $userManager = $con->get('fos_user.user_manager');
         $users = $userManager->findUsers();
 
-        /** @var User $user */
         foreach($users as $user) {
             // Check if user is active by doPing
             if ($user->getUserState() != null) {

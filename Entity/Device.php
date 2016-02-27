@@ -135,10 +135,10 @@ class Device
     /**
      * Add user
      *
-     * @param \Sopinet\ChatBundle\Model\UserInterface
+     * @param User $user
      * @return Device
      */
-    public function addUser(\Sopinet\ChatBundle\Model\UserInterface $user)
+    public function addUser($user)
     {
         $this->user[] = $user;
 
@@ -148,9 +148,9 @@ class Device
     /**
      * Remove user
      *
-     * @param \Sopinet\ChatBundle\Model\UserInterface $user
+     * @param User $user
      */
-    public function removeUser(\Sopinet\ChatBundle\Model\UserInterface $user)
+    public function removeUser($user)
     {
         $this->user->removeElement($user);
     }

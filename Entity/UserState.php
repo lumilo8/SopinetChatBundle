@@ -1,7 +1,6 @@
 <?php
 namespace Sopinet\ChatBundle\Entity;
 
-use Sopinet\ChatBundle\Model\UserInterface as User;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use JMS\Serializer\Annotation\Groups;
@@ -77,10 +76,10 @@ class UserState
     /**
      * Set user
      *
-     * @param \Sopinet\ChatBundle\Model\UserInterface $user
+     * @param User $user
      * @return UserState
      */
-    public function setUser(\Sopinet\ChatBundle\Model\UserInterface $user = null)
+    public function setUser($user = null)
     {
         $this->user = $user;
 
@@ -90,7 +89,7 @@ class UserState
     /**
      * Get user
      *
-     * @return \Sopinet\ChatBundle\Model\UserInterface 
+     * @return User 
      */
     public function getUser()
     {

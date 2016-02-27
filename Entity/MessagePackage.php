@@ -159,10 +159,10 @@ class MessagePackage
     /**
      * Set toUser
      *
-     * @param \Sopinet\ChatBundle\Model\UserInterface $toUser
+     * @param User $toUser
      * @return MessagePackage
      */
-    public function setToUser(\Sopinet\ChatBundle\Model\UserInterface $toUser = null)
+    public function setToUser($toUser = null)
     {
         $this->toUser = $toUser;
 
@@ -172,7 +172,7 @@ class MessagePackage
     /**
      * Get toUser
      *
-     * @return \Sopinet\ChatBundle\Model\UserInterface
+     * @return User
      */
     public function getToUser()
     {

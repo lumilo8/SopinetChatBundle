@@ -1,6 +1,5 @@
 <?php
 namespace Sopinet\ChatBundle\Entity;
-use Sopinet\ChatBundle\Model\UserInterface as User;
 use Sopinet\ChatBundle\Entity\Message;
 use Doctrine\ORM\Mapping as ORM;
 

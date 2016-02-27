@@ -3,7 +3,6 @@
 namespace Sopinet\ChatBundle\Form\DataTransformer;
 
 use AppBundle\Services\LoginHelper;
-use Sopinet\ChatBundle\Model\UserInterface as User;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;

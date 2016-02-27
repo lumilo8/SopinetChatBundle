@@ -2,7 +2,7 @@
 
 namespace Sopinet\ChatBundle\Service;
 
-use Sopinet\ChatBundle\Model\UserInterface as User;
+use FOS\UserBundle\Model\User as User;
 use Sopinet\ChatBundle\Entity\ChatRepository;
 use Sopinet\ChatBundle\Entity\Message;
 use Sopinet\ChatBundle\Entity\Device;

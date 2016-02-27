@@ -1,7 +1,6 @@
 <?php
 
 namespace Sopinet\ChatBundle\Model;
-use Sopinet\ChatBundle\Model\UserInterface as User;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 /**
  * Message trait.

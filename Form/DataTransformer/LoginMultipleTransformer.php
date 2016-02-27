@@ -3,7 +3,6 @@
 namespace Sopinet\ChatBundle\Form\DataTransformer;
 
 use AppBundle\Services\LoginHelper;
-use Sopinet\ChatBundle\Model\UserInterface as User;
 use Sopinet\ChatBundle\Entity\Device;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\Form\DataTransformerInterface;

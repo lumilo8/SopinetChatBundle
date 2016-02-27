@@ -194,10 +194,10 @@ class Chat
     /**
      * Add chatMembers
      *
-     * @param \Sopinet\ChatBundle\Model\UserInterface $chatMembers
+     * @param $chatMembers
      * @return Chat
      */
-    public function addChatMember(\Sopinet\ChatBundle\Model\UserInterface $chatMembers)
+    public function addChatMember($chatMembers)
     {
         $this->chatMembers[] = $chatMembers;
         $chatMembers->addChat($this);
@@ -208,9 +208,9 @@ class Chat
     /**
      * Remove chatMembers
      *
-     * @param \Sopinet\ChatBundle\Model\UserInterface $chatMembers
+     * @param $chatMembers
      */
-    public function removeChatMember(\Sopinet\ChatBundle\Model\UserInterface $chatMembers)
+    public function removeChatMember($chatMembers)
     {
         $this->chatMembers->removeElement($chatMembers);
     }
@@ -228,10 +228,10 @@ class Chat
     /**
      * Set admin
      *
-     * @param \Sopinet\ChatBundle\Model\UserInterface $admin
+     * @param $admin
      * @return Chat
      */
-    public function setAdmin(\Sopinet\ChatBundle\Model\UserInterface $admin = null)
+    public function setAdmin($admin = null)
     {
         $this->admin = $admin;
 
@@ -241,7 +241,7 @@ class Chat
     /**
      * Get admin
      *
-     * @return \Sopinet\ChatBundle\Model\UserInterface
+     * @return User
      */
     public function getAdmin()
     {
