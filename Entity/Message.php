@@ -216,7 +216,9 @@ abstract class Message
 
         // If user not null
         if ($this->getFromUser() != null) {
-            $messageObject->fromPhone = $this->getFromUser()->getPhone();
+            if (method_exists($this->getFromUser(), 'getPhone')) {
+                $messageObject->fromPhone = $this->getFromUser()->getPhone();    
+            }
             $messageObject->fromUsername = $this->getFromUser()->__toString();
             if ($this->getFromUser()->getFile() != null) {
                 $messageObject->fromUserPicture = $this->getFromUser()->getFile()->getHttpWebPath($container, $request);
