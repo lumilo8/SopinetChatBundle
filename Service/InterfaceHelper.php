@@ -3,11 +3,6 @@
 namespace Sopinet\ChatBundle\Service;
 
 use AppBundle\Services\LoginHelper;
-use Application\Sonata\UserBundle\Entity\User;
-use Doctrine\Bundle\DoctrineBundle\Mapping\MetadataFactory;
-use FOS\RestBundle\View\ViewHandler;
-use FOS\UserBundle\Document\UserManager;
-use Sonata\CoreBundle\Model\Metadata;
 use Sopinet\ChatBundle\Entity\Chat;
 use Sopinet\ChatBundle\Entity\ChatRepository;
 use Sopinet\ChatBundle\Entity\DeviceRepository;
@@ -15,15 +10,12 @@ use Sopinet\ChatBundle\Entity\Message;
 use Sopinet\ChatBundle\Entity\MessagePackage;
 use Sopinet\ChatBundle\Entity\MessageUserState;
 use Sopinet\ChatBundle\Entity\UserState;
-use Sopinet\ChatBundle\Form\ChatType;
 use Sopinet\ChatBundle\Form\DeviceType;
 use Sopinet\ChatBundle\Entity\Device;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
-use FOS\RestBundle\View\View;
 use Doctrine\ORM\EntityManager;
-use JMS\Serializer\SerializationContext;
 use Symfony\Component\Security\Acl\Exception\Exception;
 use SopinetApiHelperBundle\Services\ApiHelper;
 

@@ -3,8 +3,7 @@
 namespace Sopinet\ChatBundle\Form\DataTransformer;
 
 use AppBundle\Services\LoginHelper;
-use Application\Sonata\UserBundle\Entity\User;
-use Doctrine\Common\Persistence\EntityManager;
+use Sopinet\ChatBundle\Model\UserInterface as User;
 use Sopinet\ChatBundle\Entity\Device;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\Form\DataTransformerInterface;

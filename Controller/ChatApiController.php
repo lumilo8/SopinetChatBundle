@@ -2,25 +2,11 @@
 
 namespace Sopinet\ChatBundle\Controller;
 
-use Application\Sonata\UserBundle\Entity\User;
-use Doctrine\ORM\EntityManager;
-use FOS\RestBundle\Controller\Annotations as Rest;
-use FOS\RestBundle\Controller\Annotations\Post;
-use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\FOSRestController;
-use Nelmio\ApiDocBundle\Annotation\ApiDoc;
-use Sopinet\ChatBundle\Entity\Chat;
-use Sopinet\ChatBundle\Entity\Message;
-use Sopinet\ChatBundle\Entity\MessageImage;
 use Sopinet\ChatBundle\Entity\MessageText;
-use Sopinet\ChatBundle\Form\ChatType;
 use SopinetApiHelperBundle\Services\ApiHelper;
-use Sopinet\ChatBundle\Service\ChatHelper;
 use Sopinet\ChatBundle\Service\InterfaceHelper;
-use Sopinet\ChatBundle\Entity\Device;
-use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Acl\Exception\Exception;
 
 

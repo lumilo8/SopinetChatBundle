@@ -1,7 +1,7 @@
 <?php
 
 namespace Sopinet\ChatBundle\Model;
-use Application\Sonata\UserBundle\Entity\User;
+use Sopinet\ChatBundle\Model\UserInterface as User;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 /**
  * Message trait.

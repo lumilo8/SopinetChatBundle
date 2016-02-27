@@ -45,7 +45,7 @@ class MessagePackage
     protected $message;
 
     /**
-     * @ORM\ManyToOne(targetEntity="\Application\Sonata\UserBundle\Entity\User", inversedBy="messagesPackageReceived", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="\Sopinet\ChatBundle\Model\UserInterface", inversedBy="messagesPackageReceived", cascade={"persist"})
      * @ORM\JoinColumn(name="toUser_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      * @ORM\OrderBy({"id" = "DESC"})
      * @Exclude
@@ -159,10 +159,10 @@ class MessagePackage
     /**
      * Set toUser
      *
-     * @param \Application\Sonata\UserBundle\Entity\User $toUser
+     * @param \Sopinet\ChatBundle\Model\UserInterface $toUser
      * @return MessagePackage
      */
-    public function setToUser(\Application\Sonata\UserBundle\Entity\User $toUser = null)
+    public function setToUser(\Sopinet\ChatBundle\Model\UserInterface $toUser = null)
     {
         $this->toUser = $toUser;
 
@@ -172,7 +172,7 @@ class MessagePackage
     /**
      * Get toUser
      *
-     * @return \Application\Sonata\UserBundle\Entity\User
+     * @return \Sopinet\ChatBundle\Model\UserInterface
      */
     public function getToUser()
     {

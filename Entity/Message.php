@@ -1,7 +1,7 @@
 <?php
 namespace Sopinet\ChatBundle\Entity;
 
-use Application\Sonata\UserBundle\Entity\User;
+use Sopinet\ChatBundle\Model\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use JMS\Serializer\Annotation\Groups;
@@ -53,7 +53,7 @@ abstract class Message
     protected $messagesGenerated;
 
     /**
-     * @ORM\ManyToOne(targetEntity="\Application\Sonata\UserBundle\Entity\User", inversedBy="messages", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="\Sopinet\ChatBundle\Model\UserInterface", inversedBy="messages", cascade={"persist"})
      * @ORM\JoinColumn(name="fromUser_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      * @ORM\OrderBy({"id" = "DESC"})
      * @Exclude
@@ -150,10 +150,10 @@ abstract class Message
     /**
      * Set fromUser
      *
-     * @param \Application\Sonata\UserBundle\Entity\User $fromUser
+     * @param \Sopinet\ChatBundle\Model\UserInterface $fromUser
      * @return Message
      */
-    public function setFromUser(\Application\Sonata\UserBundle\Entity\User $fromUser = null)
+    public function setFromUser(\Sopinet\ChatBundle\Model\UserInterface $fromUser = null)
     {
         $this->fromUser = $fromUser;
 
@@ -163,7 +163,7 @@ abstract class Message
     /**
      * Get user
      *
-     * @return \Application\Sonata\UserBundle\Entity\User
+     * @return \Sopinet\ChatBundle\Model\UserInterface
      */
     public function getFromUser()
     {

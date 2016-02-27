@@ -2,13 +2,9 @@
 
 namespace Sopinet\ChatBundle\Tests\Controller;
 
-use Application\Sonata\UserBundle\Entity\User;
 use Sopinet\ChatBundle\Service\InterfaceHelper;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\Console\Application;
-use Symfony\Component\Console\Input\StringInput;
 use Symfony\Component\DependencyInjection\Container;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class GeneralControllerTest extends WebTestCase
 {

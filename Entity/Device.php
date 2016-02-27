@@ -1,7 +1,7 @@
 <?php
 namespace Sopinet\ChatBundle\Entity;
 
-use Application\Sonata\UserBundle\Entity\User;
+use Sopinet\ChatBundle\Model\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints as DoctrineAssert;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
@@ -43,7 +43,7 @@ class Device
     protected $deviceGCMId;
 
     /**
-     * @ORM\ManyToMany(targetEntity="\Application\Sonata\UserBundle\Entity\User", inversedBy="devices")
+     * @ORM\ManyToMany(targetEntity="\Sopinet\ChatBundle\Model\UserInterface", inversedBy="devices")
      */
     protected $user;
 
@@ -135,10 +135,10 @@ class Device
     /**
      * Add user
      *
-     * @param \Application\Sonata\UserBundle\Entity\User $user
+     * @param \Sopinet\ChatBundle\Model\UserInterface
      * @return Device
      */
-    public function addUser(\Application\Sonata\UserBundle\Entity\User $user)
+    public function addUser(\Sopinet\ChatBundle\Model\UserInterface $user)
     {
         $this->user[] = $user;
 
@@ -148,9 +148,9 @@ class Device
     /**
      * Remove user
      *
-     * @param \Application\Sonata\UserBundle\Entity\User $user
+     * @param \Sopinet\ChatBundle\Model\UserInterface $user
      */
-    public function removeUser(\Application\Sonata\UserBundle\Entity\User $user)
+    public function removeUser(\Sopinet\ChatBundle\Model\UserInterface $user)
     {
         $this->user->removeElement($user);
     }
@@ -204,7 +204,7 @@ class Device
      *
      * @param MessagePackage $messagePackageReceived
      *
-     * @return User
+     * @return Device
      */
     public function addMessagePackageReceived(MessagePackage $messagePackageReceived)
     {

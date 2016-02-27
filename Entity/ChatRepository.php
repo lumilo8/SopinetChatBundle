@@ -2,7 +2,7 @@
 namespace Sopinet\ChatBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
-use \Application\Sonata\UserBundle\Entity\User as User;
+use \Sopinet\ChatBundle\Model\UserInterface as User;
 
 class ChatRepository extends EntityRepository
 {

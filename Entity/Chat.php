@@ -1,7 +1,7 @@
 <?php
 namespace Sopinet\ChatBundle\Entity;
 
-use Application\Sonata\UserBundle\Entity\User;
+use Sopinet\ChatBundle\Model\UserInterface;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Entity\UserManager;
@@ -51,14 +51,14 @@ class Chat
     protected $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity="\Application\Sonata\UserBundle\Entity\User", mappedBy="chats")
+     * @ORM\ManyToMany(targetEntity="\Sopinet\ChatBundle\Model\UserInterfacer", mappedBy="chats")
      */
     protected $chatMembers;
 
     /**
      * Administrador o persona que inicia el Chat
      *
-     * @ORM\ManyToOne(targetEntity="\Application\Sonata\UserBundle\Entity\User", inversedBy="chatsOwned", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="\Sopinet\ChatBundle\Model\UserInterface", inversedBy="chatsOwned", cascade={"persist"})
      * @ORM\JoinColumn(name="admin_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     protected $admin;
@@ -194,10 +194,10 @@ class Chat
     /**
      * Add chatMembers
      *
-     * @param \Application\Sonata\UserBundle\Entity\User $chatMembers
+     * @param \Sopinet\ChatBundle\Model\UserInterface $chatMembers
      * @return Chat
      */
-    public function addChatMember(\Application\Sonata\UserBundle\Entity\User $chatMembers)
+    public function addChatMember(\Sopinet\ChatBundle\Model\UserInterface $chatMembers)
     {
         $this->chatMembers[] = $chatMembers;
         $chatMembers->addChat($this);
@@ -208,9 +208,9 @@ class Chat
     /**
      * Remove chatMembers
      *
-     * @param \Application\Sonata\UserBundle\Entity\User $chatMembers
+     * @param \Sopinet\ChatBundle\Model\UserInterface $chatMembers
      */
-    public function removeChatMember(\Application\Sonata\UserBundle\Entity\User $chatMembers)
+    public function removeChatMember(\Sopinet\ChatBundle\Model\UserInterface $chatMembers)
     {
         $this->chatMembers->removeElement($chatMembers);
     }
@@ -228,10 +228,10 @@ class Chat
     /**
      * Set admin
      *
-     * @param \Application\Sonata\UserBundle\Entity\User $admin
+     * @param \Sopinet\ChatBundle\Model\UserInterface $admin
      * @return Chat
      */
-    public function setAdmin(\Application\Sonata\UserBundle\Entity\User $admin = null)
+    public function setAdmin(\Sopinet\ChatBundle\Model\UserInterface $admin = null)
     {
         $this->admin = $admin;
 
@@ -241,7 +241,7 @@ class Chat
     /**
      * Get admin
      *
-     * @return \Application\Sonata\UserBundle\Entity\User
+     * @return \Sopinet\ChatBundle\Model\UserInterface
      */
     public function getAdmin()
     {

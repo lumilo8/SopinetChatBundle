@@ -35,11 +35,11 @@ class ChatMembersTransformer implements DataTransformerInterface
     public function reverseTransform($chatMembersArrayString)
     {
         $uIDArray = explode(',',$chatMembersArrayString);
-        $reUser = $this->em->getRepository('ApplicationSonataUserBundle:User');
+        $userManager = $this->container->get('fos_user.user_manager');
 
         $uObjectArray = array();
         foreach($uIDArray as $uID) {
-            $user = $reUser->find($uID);
+            $user = $userManager->findUserById($uID);
             if ($user) {
                 $uObjectArray[] = $user;
             } else {
