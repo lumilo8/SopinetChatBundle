@@ -60,16 +60,10 @@ class ChatRepository extends EntityRepository
 
 
     /**
-     * 
-     * ESTA FUNCION PARECE DEPRECATED
-     * 
-     * TODO: ELIMINAR
-     * 
-     * 
      * Function to enabled chat
      * @param Chat $chat
      */
-    public function enabledChatDEPRECATED(Chat $chat){
+    public function enabledChat(Chat $chat){
 
         $em = $this->getEntityManager();
 
