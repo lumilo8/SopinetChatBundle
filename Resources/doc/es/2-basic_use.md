@@ -5,9 +5,18 @@ automáticamente disponible en api/doc. Cabe señalar que no se indica en la doc
 pues estos quedan desacoplados a través del servicio sopinet_login_helper.
 
 ## Instalación:
+
+Symfony 2.6
 ```
 SopinetChatBundle:
     resource: "@SopinetChatBundle/Resources/config/routing.yml"
+    prefix:   /api/chat
+```
+
+Symfony 2.8 (quizás esta forma también sirva en Symfony 2.6)
+```
+SopinetChatBundle:
+    resource: "@SopinetChatBundle/Resources/config/"
     prefix:   /api/chat
 ```
 
