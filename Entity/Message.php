@@ -220,11 +220,13 @@ abstract class Message
                 $messageObject->fromPhone = $this->getFromUser()->getPhone();    
             }
             $messageObject->fromUsername = $this->getFromUser()->__toString();
-            if ($this->getFromUser()->getFile() != null) {
-                $messageObject->fromUserPicture = $this->getFromUser()->getFile()->getHttpWebPath($container, $request);
-            } else {
-                // TODO: ¿Default Avatar? ¿In File?
-                $messageObject->fromUserPicture = null;
+            if (method_exists($this->getFromUser(), 'getFile')) {
+                if ($this->getFromUser()->getFile() != null) {
+                    $messageObject->fromUserPicture = $this->getFromUser()->getFile()->getHttpWebPath($container, $request);
+                } else {
+                    // TODO: ¿Default Avatar? ¿In File?
+                    $messageObject->fromUserPicture = null;
+                }                
             }
             $messageObject->fromUserId = $this->getFromUser()->getId();
         }
