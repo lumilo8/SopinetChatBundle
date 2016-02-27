@@ -51,7 +51,7 @@ class Chat
     protected $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity="\Sopinet\ChatBundle\Model\UserInterfacer", mappedBy="chats")
+     * @ORM\ManyToMany(targetEntity="\Sopinet\ChatBundle\Model\UserInterface", mappedBy="chats")
      */
     protected $chatMembers;
 
