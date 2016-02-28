@@ -39,20 +39,9 @@ fos_rest:
         default_format: json
 ```
 
-Añadir a routing.yml:
-
-```yaml
-fos_user:
-    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
-```
-
-Ejecutar desde consola:
-
-```
-php bin/console doctrine:schema:update --force
-```
-
 ### FOSUserBundle
+
+Añadir a config.yml
 
 ```
 fos_user:
@@ -65,6 +54,27 @@ Si se está usando SonataUser:
 
 ```
     user_class: Application\Sonata\UserBundle\Entity\User)
+```
+
+Añadir a security.yml
+
+```
+security:
+    encoders:
+        FOS\UserBundle\Model\UserInterface: bcrypt
+```
+
+Añadir a routing.yml:
+
+```yaml
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+```
+
+Ejecutar desde consola:
+
+```
+php bin/console doctrine:schema:update --force
 ```
 
 ### RMSPushNotificationsBundle
