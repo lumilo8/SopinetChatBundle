@@ -1,8 +1,8 @@
 # Requisitos previos:
 
-1. Este bundle necesita de la instalación y configuración previa de otros bundles.
-2. Ante cualquier problema de configuración, visitar la documentación oficial del propio bundle.
-3. Más adelante, cuando se explique sobre la instalación del SopinetChatBundle, se incluirán los parámetros de configuración de estos bundles.
+1. SopinetChatBundle necesita de la instalación y configuración de bundles de terceros.
+2. Ante cualquier problema de configuración, visitar la documentación oficial del bundle de tercero.
+3. Más adelante, cuando se explique sobre la instalación del SopinetChatBundle, se incluirá toda la información necesaria para la instalación y configuración de estos bundles de terceros.
 
 ## FOSUserBundle
 
