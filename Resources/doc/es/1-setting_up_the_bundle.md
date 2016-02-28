@@ -1,10 +1,3 @@
-# Requisitos:
-
-- El sistema hace uso de Application\Sonata\UserBundle\Entity\User.php, por tanto, éste debe ser el sistema para Usuarios por defecto.
-- El sistema hace uso de RMS_PUSH_NOTIFICATION
-- El sistema hace uso del protocolo de interfaz de Login estándar, definido en Sopinet: esto es, un servicio "sopinet_login_helper", que dispoga de una función públia getUser(Request $request), la cual devuelva un objeto de tipo User. Más información aquí: http://redmine.sopinet.es:3000/projects/symfony-development/wiki/Requisitos_para_la_implementaci%C3%B3n_del_checkeo_de_Usuario_desde_API
-- Es probable que se estén utilizando otros bundles (como fos_rest_bundle) y la gestión de dependencias en composer.json no esté debidamente especificada, pero estos bundles son típicos que utilizamos en BasicSymfony.
-
 # Instalación básica:
 
 ## Instalación del bundle desde el repositorio privado:
@@ -24,10 +17,57 @@
 ## Añadimos a AppKernel:
 
 ```php
+new FOS\RestBundle\FOSRestBundle(),
+new JMS\SerializerBundle\JMSSerializerBundle(),
+new Sopinet\ApiHelperBundle\SopinetApiHelperBundle(),
+new FOS\UserBundle\FOSUserBundle(),
+new Knp\DoctrineBehaviors\Bundle\DoctrineBehaviorsBundle(),
+new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+new RMS\PushNotificationsBundle\RMSPushNotificationsBundle(),
 new Sopinet\ChatBundle\SopinetChatBundle(),
 ```
 
-## Configuración de RMS_PUSH_NOTIFICATION:
+## Configuración de Bundles:
+
+### FOSRestAPI
+
+Añadir a config.yml:
+
+```yaml
+fos_rest:
+    routing_loader:
+        default_format: json
+```
+
+Añadir a routing.yml:
+
+```yaml
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+```
+
+Ejecutar desde consola:
+
+```
+php bin/console doctrine:schema:update --force
+```
+
+### FOSUserBundle
+
+```
+fos_user:
+    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    firewall_name: main
+    user_class: AppBundle\Entity\YourUserEntity
+```
+
+Si se está usando SonataUser: 
+
+```
+    user_class: Application\Sonata\UserBundle\Entity\User)
+```
+
+### RMSPushNotificationsBundle
 
 ```
 rms_push_notifications:
@@ -40,18 +80,23 @@ rms_push_notifications:
         passphrase: %chat_apn_passpharase%
 ```
 
-### Configuración de sopinet_chat (No es necesaria, si no se indica se activará por defecto):
+## Configuración de SopinetChatBundle:
+
+TODO: Completar y revisar
+Debido a un fallo que está pendiente de revisar, anyType siempre tiene que estar activo por ahora:
 
 ```
 sopinet_chat:
-    anyType: false (default)
+    anyType: true
     enabledAndroid: true (default)
     enabledIOS: true (default)
 ```
 
-## Integración con User
+## Integración con tu entidad User
 
-En nuestra entidad user habrá que incorporar un trait:
+### YourUserEntity
+
+En nuestra entidad User habrá que incorporar un trait:
 ```php
     use \Sopinet\ChatBundle\Model\UserChat {
         __construct as _traitconstructor;
@@ -65,5 +110,42 @@ Y en el constructor:
         parent::__construct();
     }
 ```
+
+### Conexión con UserInterface
+
+Habrá que indicar a SopinetChatBundle qué clase Usuario estamos utilizando, para ello, se realizará la especificación mediante una interface. En el fichero config.yml:
+
+```
+doctrine:
+    orm:
+        resolve_target_entities:
+            Sopinet\ChatBundle\Model\UserInterface: AppBundle\Entity\YourUserEntity
+```
+
+Si se está usando SonataUser, sería:
+```
+doctrine:
+    orm:
+        resolve_target_entities:
+            Sopinet\ChatBundle\Model\UserInterface: Application\Sonata\UserBundle\Entity\User
+```
+
+## Otras configuraciones obligatorias
+
+### Habilitar el tipo enum
+
+```
+doctrine:
+    dbal:
+        mapping_types:
+            enum: string
+```
+
+### sopinet_login_helper
+
+Se debe cumplir con la interface de login de Sopinet:
+http://redmine.sopinet.es:3000/projects/symfony-development/wiki/Requisitos_para_la_implementaci%C3%B3n_del_checkeo_de_Usuario_desde_API
+
+TODO: Describir mejor esta parte.
 
 [Volver al índice](README.md)

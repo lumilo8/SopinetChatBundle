@@ -19,7 +19,12 @@
   ],
   "require": {
     "php": ">=5.3.9",
-    "sopinet/apihelper-bundle": "1.0"
+    "sopinet/apihelper-bundle": "1.0",
+    "friendsofsymfony/user-bundle": "~2.0@dev",
+    "knplabs/doctrine-behaviors": "~1.1",
+    "nelmio/api-doc-bundle": "^2.4",
+    "richsage/rms-push-notifications-bundle": "^0.1.8",
+    "stof/doctrine-extensions-bundle": "^1.1"
   },
   "autoload": {
     "psr-0": { "Sopinet\\ChatBundle": "" }

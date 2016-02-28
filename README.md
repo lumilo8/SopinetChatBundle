@@ -7,6 +7,7 @@
 
 # Instalación
 
+- [Requisitos previos](Resources/doc/es/0-previous_requirements.md)
 - [Cómo instalar y configurar el Bundle](Resources/doc/es/1-setting_up_the_bundle.md)
 
 # Utilización
