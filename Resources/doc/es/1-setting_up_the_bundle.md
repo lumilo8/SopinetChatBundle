@@ -90,17 +90,26 @@ rms_push_notifications:
         passphrase: %chat_apn_passpharase%
 ```
 
-## Configuración de SopinetChatBundle:
+## Configuración de SopinetChatBundle (opcional):
 
-TODO: Completar y revisar
-Debido a un fallo que está pendiente de revisar, anyType siempre tiene que estar activo por ahora:
+Todos los parámetros de configuración son opcionales, si no se especifica nada el Bundle funcionará por defecto.
 
 ```
 sopinet_chat:
-    anyType: true
-    enabledAndroid: true (default)
-    enabledIOS: true (default)
+    anyType: false (Permite el envío de cualquier tipo de Mensajes incluso no definidos)
+    enabledAndroid: true (Activación de funcionamiento en Android)
+    enabledIOS: true (Activación de funcionamiento en iOS)
+    enabledWeb: false (Activación de funcionamiento en Cliente Web)
+    background: false (Activación de funcionamiento a través de una cola de mensajes en Background)
+    soundIOS: default (Se puede indicar el nombre del fichero local en iOS que sonará en las notificaciones)
 ```
+
+enabledWeb, Necesitarás configurar WebSocket si lo quieres activar:
+[WebSocket](background/websocket.md)
+
+background, Necesitarás configurar RabbitMQ si lo quieres activar:
+[RabbitMQ](background/rabbitMQ.md)
+
 
 ## Integración con tu entidad User
 
