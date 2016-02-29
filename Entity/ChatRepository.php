@@ -2,7 +2,6 @@
 namespace Sopinet\ChatBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
-use \Sopinet\ChatBundle\Model\UserInterface as User;
 
 class ChatRepository extends EntityRepository
 {
@@ -11,7 +10,7 @@ class ChatRepository extends EntityRepository
      * para una serie de Usuarios pasados por parámetro
      * Si no existe devuelve null
      *
-     * @param User[] $users
+     * @param $users
      *
      * @return Chat
      */
@@ -49,11 +48,11 @@ class ChatRepository extends EntityRepository
 
     /**
      * Comprueba si un usuario esta dentro de un chat
-     * @param User $user
+     * @param $user
      * @param Chat $chat
      * @return bool
      */
-    public function userInChat(User $user,Chat $chat)
+    public function userInChat($user,Chat $chat)
     {
         return in_array($user, $chat->getChatMembers()->toArray());
     }

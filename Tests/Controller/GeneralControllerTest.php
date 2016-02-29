@@ -37,7 +37,7 @@ class GeneralControllerTest extends WebTestCase
     {
         $userManager = $this->container->get('fos_user.user_manager');
 
-        /** @var User $user1 */
+        /** @var $user1 */
         $user1 = $userManager->createUser();
 
         $user1->setEmail("testChat1@sopinetchat.com");
@@ -49,7 +49,7 @@ class GeneralControllerTest extends WebTestCase
 
         $userManager->updateUser($user1);
 
-        /** @var User $user2 */
+        /** @var $user2 */
         $user2 = $userManager->createUser();
 
         $user2->setEmail("testChat2@sopinetchat.com");

@@ -76,7 +76,7 @@ class UserState
     /**
      * Set user
      *
-     * @param User $user
+     * @param $user
      * @return UserState
      */
     public function setUser($user = null)

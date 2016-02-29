@@ -99,7 +99,7 @@ class MessageHelper {
         return $sentCount;
     }
 
-    public function sendMessageToUser(Message $message, User $user) {
+    public function sendMessageToUser(Message $message, $user) {
         $config = $this->container->getParameter('sopinet_chat.config');
 
         $sentCount = 0;
@@ -155,7 +155,7 @@ class MessageHelper {
      * @param String $to
      *
      */
-    public function sendRealMessageToDevice(Message $message, Device $device, User $user = null, Request $request = null, $printOut = false)
+    public function sendRealMessageToDevice(Message $message, Device $device, $user = null, Request $request = null, $printOut = false)
     {
         $config = $this->container->getParameter('sopinet_chat.config');
 
@@ -276,7 +276,7 @@ class MessageHelper {
         // - $em = $this->container->get("doctrine.orm.entity_manager");
         // - $reDevice = $em->getRepository('ApplicationSopinetUserBundle:User');
 
-        /** @var User $user */
+        /** @var $user */
         // $user=$reDevice->findOneByPhone($mes['phone']);
         if ($contentAvailable) {
             /**

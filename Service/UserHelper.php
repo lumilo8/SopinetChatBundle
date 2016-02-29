@@ -24,10 +24,10 @@ class UserHelper
      * En caso de cambiar de estado, se notificará a los demás usuarios del Chat en el que está
      * de que el estado a cambiado a conectado.
      *
-     * @param User $user - Usuario sobre el que se hace el ping
+     * @param $user - Usuario sobre el que se hace el ping
      * @return boolean $notify - Devuelve si se notifica (hay cambio), o no.
      */
-    public function doPing(User $user) {
+    public function doPing($user) {
         /** @var EntityManager $em */
         $em = $this->container->get('doctrine.orm.default_entity_manager');
         $notify = false;

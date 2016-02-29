@@ -135,7 +135,7 @@ class Device
     /**
      * Add user
      *
-     * @param User $user
+     * @param $user
      * @return Device
      */
     public function addUser($user)
@@ -148,7 +148,7 @@ class Device
     /**
      * Remove user
      *
-     * @param User $user
+     * @param $user
      */
     public function removeUser($user)
     {

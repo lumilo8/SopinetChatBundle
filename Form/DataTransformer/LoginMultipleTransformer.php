@@ -49,7 +49,7 @@ class LoginMultipleTransformer implements DataTransformerInterface
         // Auth User, Check and Set
         /** @var LoginHelper $loginHelper */
         $loginHelper = $this->container->get('sopinet_login_helper');
-        /** @var User $user */
+        /** @var $user */
         try {
             $user = $loginHelper->getUser($this->request);
         } catch(Exception $e) {

@@ -29,7 +29,7 @@ class MessageUserState extends Message
             foreach($chat->getChatMembers() as $chatMember) {
                 if ($chatMember->getId() != $this->getFromUser()->getId()) {
                     $is = false;
-                    /** @var User $user */
+                    /** @var $user */
                     foreach($toUsers as $user) {
                         if ($user->getId() == $chatMember->getId()) $is = true;
                     }

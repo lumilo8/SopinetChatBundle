@@ -30,7 +30,7 @@ class MyCustomApiChatController extends FOSRestController
         /** ApiHelper */
         $apiHelper = $this->get('sopinet_apihelperbundle_apihelper');
 
-        /** @var User $user */
+        /** @var $user */
         try {
             $user = $loginHelper->getUser($request);
         } catch(Exception $e) {
