@@ -217,6 +217,8 @@ class Chat
 
     /**
      * Get chatMembers
+     * 
+     * TODO: Chat needs another function like it, with other name: "getMyChatMembers". 
      *
      * @return \Doctrine\Common\Collections\Collection
      */

@@ -22,6 +22,7 @@
 
 - [Utilizando el bundle desde el Servicio InterfaceHelper](Resources/doc/es/3-advance_use_service.md)
 - [Tipos de Mensajes](Resources/doc/es/4-advance_use_messages.md)
+- [Tipos de Chats](Resources/doc/es/5-advance_use_chats.md)
 
 # Servicios en Background
 
