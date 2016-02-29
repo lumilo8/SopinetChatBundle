@@ -2,22 +2,14 @@
 
 namespace Sopinet\ChatBundle\Form;
 
-use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\QueryBuilder;
-use Sopinet\ChatBundle\Entity\Message;
 use Sopinet\ChatBundle\Form\DataTransformer\ChatTransformer;
-use Sopinet\ChatBundle\Form\DataTransformer\TimeTransformer;
 use Sopinet\ChatBundle\Form\DataTransformer\DeviceTransformer;
 use Sopinet\ChatBundle\Form\DataTransformer\LoginTransformer;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Validator\Constraints\Length;
-use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Form\Extension\Core\DataTransformer\DateTimeToTimestampTransformer;
 
 class MessageType extends AbstractType

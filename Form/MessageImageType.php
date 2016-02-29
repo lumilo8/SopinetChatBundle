@@ -2,20 +2,13 @@
 
 namespace Sopinet\ChatBundle\Form;
 
-use AppBundle\Entity\Answer;
-use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\QueryBuilder;
-use Sopinet\ChatBundle\Entity\Message;
 use Sopinet\ChatBundle\Entity\MessageImage;
 use Sopinet\ChatBundle\Form\DataTransformer\FileTransformer;
 use Sopinet\ChatBundle\Form\MessageType;
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Validator\Constraints\Length;
-use Symfony\Component\Validator\Constraints\NotBlank;
 
 class MessageImageType extends MessageType
 {

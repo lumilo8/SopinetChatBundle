@@ -21,7 +21,7 @@
 # Utilización avanzada
 
 - [Utilizando el bundle desde el Servicio InterfaceHelper](Resources/doc/es/3-advance_use_service.md)
-- [Tipos de Mensajes](4-advance_use_messages.md)
+- [Tipos de Mensajes](Resources/doc/es/4-advance_use_messages.md)
 
 # Servicios en Background
 
