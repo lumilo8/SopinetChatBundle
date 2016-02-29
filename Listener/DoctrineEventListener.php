@@ -49,10 +49,8 @@ class DoctrineEventListener
                 }
             }
 
-            // Add any message Type?
-            if ($this->config['anyType']) {
-                $discriminatorMap['any'] = "Sopinet\ChatBundle\Entity\MessageAny";
-            }
+            // Add alway any message Type for prevent discriminatormap error
+            $discriminatorMap['any'] = "Sopinet\ChatBundle\Entity\MessageAny";
 
             $metadata->setDiscriminatorMap($discriminatorMap);
         } else if ($class->getName() == "Sopinet\ChatBundle\Entity\Chat") {
