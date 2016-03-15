@@ -162,9 +162,7 @@ doctrine:
 
 ### sopinet_login_helper
 
-Se debe cumplir con la interface de login de Sopinet:
-http://redmine.sopinet.es:3000/projects/symfony-development/wiki/Requisitos_para_la_implementaci%C3%B3n_del_checkeo_de_Usuario_desde_API
-
+Es necesario tener un servicio de Login declarado.
 TODO: Describir mejor esta parte.
 
 [Volver al índice](README.md)
