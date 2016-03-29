@@ -15,6 +15,11 @@
       "name": "Fernando Hidalgo",
       "email": "fhidalgo@sopinet.com",
       "homepage": "http://sopinet.com"
+    },
+    {
+      "name": "Juan Martos",
+      "email": "jmartos@sopinet.com",
+      "homepage": "http://sopinet.com"
     }
   ],
   "require": {
@@ -25,7 +30,8 @@
     "nelmio/api-doc-bundle": "^2.4",
     "richsage/rms-push-notifications-bundle": "^0.1.8",
     "stof/doctrine-extensions-bundle": "^1.1",
-    "gos/web-socket-bundle": "^1.6"
+    "gos/web-socket-bundle": "^1.6",
+    "oldsound/rabbitmq-bundle": "1.*"
   },
   "autoload": {
     "psr-0": { "Sopinet\\ChatBundle": "" }
