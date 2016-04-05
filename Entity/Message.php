@@ -8,9 +8,9 @@ use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\Exclude;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Sopinet\ChatBundle\Model\MessageObject;
-use Sopinet\ChatBundle as Chat;
 use Symfony\Bridge\Doctrine\Validator\Constraints as DoctrineAssert;
 use Symfony\Component\DependencyInjection\Container;
+use Sopinet\ChatBundle\Model\MinimalPackage as MinimalPackage;
 
 /**
  * Entity Message
@@ -24,7 +24,7 @@ use Symfony\Component\DependencyInjection\Container;
  */
 abstract class Message
 {
-    use Chat\Model\MinimalPackage;
+    use MinimalPackage;
     use ORMBehaviors\Timestampable\Timestampable;
 
     /**
