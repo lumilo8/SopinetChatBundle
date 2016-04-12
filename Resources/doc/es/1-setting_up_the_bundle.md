@@ -162,7 +162,77 @@ doctrine:
 
 ### sopinet_login_helper
 
-Es necesario tener un servicio de Login declarado.
-TODO: Describir mejor esta parte.
+Es necesario tener un servicio de Login declarado, de esta forma todas la conexión con el usuario quedará realizada.
+
+La función Helper debe tener un método getUser, que recibe un parámetro Request y devuelve un objeto User
+
+#### Declaración de Servicio
+```
+    sopinet_login_helper:
+        class: AppBundle\Services\LoginHelper
+        arguments: ["@service_container", "@doctrine.orm.entity_manager", "@fos_rest.view_handler", "@security.password_encoder"]
+```
+
+#### Ejemplo de implementación de función getUser
+
+Sería posible conectar esta implementación con [Guard](http://symfony.com/blog/new-in-symfony-2-8-guard-authentication-component), en un futuro no se descarta utilizar directamente Guard, pero por ahora se podría conectar con Guard implementándolo en la función getUser.
+
+```
+class LoginHelper
+{
+    const ERROR_DATA = "Data error";
+    const ERROR_AUTH = "Authentication error";
+
+    public function __construct(Container $container, EntityManager $entityManager, ViewHandler $viewHandler, UserPasswordEncoder $userPasswordEncoder)
+    {
+        $this->em = $entityManager;
+        $this->viewhandler = $viewHandler;
+        $this->encoder = $userPasswordEncoder;
+        $this->container = $container;
+    }
+
+    /**
+     * Devuelve el User con los parámetros facilitados
+     *
+     * @param Request $request
+     * @return User
+     * @throws Exception
+     */
+    public function getUser(Request $request) {
+        // No implementamos esta función en el ejemplo por carecer de relevación
+        $checkParameters = $this->checkAuthenticationParameters($request);
+        if (!$checkParameters) {
+            throw new Exception(LoginHelper::ERROR_DATA);
+        }
+
+        // No implementamos algunas funciones más en el ejemplo por carecer de relevación
+        if ($request->get('type') === User::TYPE_CLIENT_FACEBOOK)
+            $user = $this->checkCredentialsFacebook($request);
+        else
+            $user = $this->checkCredentialsNormal($request);
+
+        if (!$user) {
+            throw new Exception(LoginHelper::ERROR_AUTH);
+        }
+
+        return $user;
+    }
+}
+```
+
+#### Uso desde ChatBundle (no es necesario considerar)
+
+Cuando SopinetChatBundle necesite coger el usuario del sistema se abstraerá del sistema de credenciales y usará el siguiente código:
+```
+        /** @var LoginHelper $loginHelper */
+        $loginHelper = $this->get('sopinet_login_helper');
+
+        /** @var User $user */
+        try {
+            $user = $loginHelper->getUser($request);
+        } catch(Exception $e) {
+            // Ha ocurrido un error
+        }
+```
 
 [Volver al índice](README.md)
