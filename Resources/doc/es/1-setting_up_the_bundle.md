@@ -5,13 +5,7 @@
 ```
 "require": {
   "sopinet/chatbundle": "dev-master",
-},
-"repositories": [
-  {
-    "type": "vcs",
-    "url":  "git@gitlab.sopinet.es:hidabe/chatbundle.git"
-  }
-],
+}
 ```
 
 ## Añadimos a AppKernel:
