@@ -71,4 +71,20 @@ class ChatRepository extends EntityRepository
         $em->persist($chat);
         $em->flush();
     }
+    
+     /**
+     *
+     * @param Chat $chat
+     * @param $user
+     * @return Message
+     */
+    public function getFirstMessage(Chat $chat, $user){
+
+        $em = $this->getEntityManager();
+        $repositoryMessage = $em->getRepository('SopinetChatBundle:Message');
+
+        $message = $repositoryMessage->findOneBy(array('chat'=> $chat, 'fromUser' => $user), array('createdAt' => 'ASC'));
+
+        return $message;
+    }
 }
