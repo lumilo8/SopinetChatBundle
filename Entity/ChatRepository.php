@@ -83,7 +83,7 @@ class ChatRepository extends EntityRepository
         $em = $this->getEntityManager();
         $repositoryMessage = $em->getRepository('SopinetChatBundle:Message');
 
-        $message = $repositoryMessage->findOneBy(array('chat'=> $chat, 'fromUser' => $user), array('createdAt' => 'ASC'));
+        $message = $repositoryMessage->findOneBy(array('typeClient'=> 'text', 'chat'=> $chat, 'fromUser' => $user), array('createdAt' => 'ASC'));
 
         return $message;
     }
